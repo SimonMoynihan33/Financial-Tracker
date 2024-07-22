@@ -21,8 +21,15 @@ def register_user():
     """
     Register user with name and unique ID
     """
+    print('NOTE: This app is used for educational purposes only, please do not provide real world \n'
+    'information pertaining to financial details')
+    print('Hello World!')
+    print('Please log in / create an account')
     name = input('Enter you name: ')
     user_id = input('Create a 4-digit ID: ')
+
+    if name != name.isalpha():
+        print('Error occurred. Plase make sure you use alpabetic letters (a-z) only.')
 
     if len(user_id) != 4 or not user_id.isdigit():
         print('Invalid ID. Your ID must be exactly 4 digits.')
