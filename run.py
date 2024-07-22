@@ -4,7 +4,7 @@ import plotly.express as px
 import pandas as pd 
 
 # Connect to SQL database
-conn = sqlite3.connect('expense_tracker_db.expense_tracker_db.py')
+conn = sqlite3.connect('expense_tracker.db')
 c = conn.cursor()
 
 # Create table if it does not exist
@@ -24,18 +24,22 @@ def register_user():
     print('NOTE: This app is used for educational purposes only, please do not provide real world \n'
     'information pertaining to financial details')
     print('Hello World!')
-    print('Please log in / create an account')
-    name = input('Enter you name: ')
+    print('Please log in / Create an account')
+    name = input('Enter your name: ')
     user_id = input('Create a 4-digit ID: ')
 
-    if name != name.isalpha():
-        print('Error occurred. Plase make sure you use alpabetic letters (a-z) only.')
-
-    if len(user_id) != 4 or not user_id.isdigit():
+    # Check if the name is aplhabetical
+    if not name.isalpha():
+        print('Please make sure you use alpabetical characters (a-z) only.')
+        return
+    
+    # Check if the user input was a 4 digit code and numeric
+    if not len(user_id) == 4 and user_id.isdigit():
         print('Invalid ID. Your ID must be exactly 4 digits.')
         return
         
     try:
+        # insert user into the database
         c.execute('INSERT INTO users (name, user_id) VALUES (?, ?)', 
         (name, user_id))
         conn.commit()
@@ -46,3 +50,5 @@ def register_user():
         print(f'An error occurred: {e}')
     
 register_user()
+
+conn.close()
