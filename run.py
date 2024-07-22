@@ -77,18 +77,15 @@ def user_login():
             continue
 
         # Validate and process the user ID
-        try:
-            if len(user_input_id) == 4 and user_input_id.isdigit():
-                user_input_id = int(user_input_id) # Convert to integer
-                if check_user_id(user_id):
-                    print(f'Valid ID entered. Welcome back')
-                    break
-                else:
-                    print('No user found with the given ID.')
+        if len(user_input_id) == 4 and user_input_id.isdigit():
+            user_input_id = int(user_input_id) # Convert to integer
+            if check_user_id(user_id):
+                print('Valid ID entered. Welcome back')
+                break
             else:
-                print('Invalid ID. It must be 4 digits long')
-        except ValueError:
-            print('Invalid input. Please enter a numeric ID')
+                print('No user found with the given ID.')
+        else:
+            print('Invalid ID. It must be 4 digits long')
 
 
 def check_user_id(user_id):
