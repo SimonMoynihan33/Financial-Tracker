@@ -50,20 +50,19 @@ def register_user():
         return
     
     # Check if the user input was a 4 digit code and numeric
-    if not len(user_id) == 4 and user_id.isdigit():
-        print('Invalid ID. Your ID must be exactly 4 digits.')
-        return
-        
-    try:
-        # insert user into the database
-        c.execute('INSERT INTO users (name, user_id) VALUES (?, ?)', 
-        (name, user_id))
-        conn.commit()
-        print('Registration successful!')
-    except sqlite3.IntegrityError: # Raises error if ID is in use
-        print('This ID is already in use. Please choose another.')
-    except Exception as e:
-        print(f'An error occurred: {e}')
+    if len(user_id) == 4 and user_id.isdigit():
+        user_id = int(user_id)
+        try:
+            # Insert user into the database
+            c.execute('INSERT INTO users (name, user_id) VALUES (?, ?)', (name, user_id))
+            conn.commit()
+            print(f'Valid ID entered. Welcome {name}. Registration successful!')
+        except sqlite3.IntegrityError:  # Raises error if ID is in use
+            print('This ID is already in use. Please choose another.')
+        except Exception as e:
+            print(f'An error occurred: {e}')
+    else:
+        print('Invalid ID. It must be 4 digits long.')
 
     
 def user_login():
@@ -73,15 +72,19 @@ def user_login():
     print('Type "BACK" to return to previous page')
     while True:
         user_input_id = input('Please enter your unique 4 digit code: ').strip()
-        if user_input_id == 'BACK':
+        if user_input_id.upper() == 'BACK':
             greet_msg() # Return to start function
             continue
 
+        # Validate and process the user ID
         try:
-            user_id = int(user_id)
-            if len(user_input) == 4 and check_user_id(user_id):
-                print(f'Valid ID entered. Welcome back {name}')
-                break
+            if len(user_input_id) == 4 and user_input_id.isdigit():
+                user_input_id = int(user_input_id) # Convert to integer
+                if check_user_id(user_id):
+                    print(f'Valid ID entered. Welcome back')
+                    break
+                else:
+                    print('No user found with the given ID.')
             else:
                 print('Invalid ID. It must be 4 digits long')
         except ValueError:

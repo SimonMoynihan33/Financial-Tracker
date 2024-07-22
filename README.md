@@ -30,3 +30,10 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 ---
 
 Happy coding!
+
+## Bugs 
+### Bug 01
+Issue - `UnboundLocalError: cannot access local variable 'user_id' where it is not associated with a value` thrown when trying to log in with saved id
+
+### Bug 02 
+Issue - `TypeError: object of type 'int' has no len()` when trying to input a name and id after changes made
