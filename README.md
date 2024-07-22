@@ -33,7 +33,16 @@ Happy coding!
 
 ## Bugs 
 ### Bug 01
-Issue - `UnboundLocalError: cannot access local variable 'user_id' where it is not associated with a value` thrown when trying to log in with saved id
+Issue - `UnboundLocalError: cannot access local variable 'user_id' where it is not associated with a value` thrown when trying to log in with saved id.
+Cause - `register_user()` and `user_login()` were given different data types (string and integer).
+Fix - Change both user_id inputs to integers.
 
 ### Bug 02 
-Issue - `TypeError: object of type 'int' has no len()` when trying to input a name and id after changes made
+Issue - `TypeError: object of type 'int' has no len()` when trying to input a name and id after changes made.
+Cause - This was due to me using `len()` for integers which python does not allow.
+Fix - Check the length of the id input before converting to an int().
+
+### Bug 03 
+Issue - `NameError: name 'user_id' is not defined` relating to the `check_user_id(user_id)` function. 
+Cause - This was due to user_id not being declared in the current scope
+Fix - 

@@ -80,7 +80,6 @@ def user_login():
         if len(user_input_id) == 4 and user_input_id.isdigit():
             user_input_id = int(user_input_id) # Convert to integer
             if check_user_id(user_id):
-                print('Valid ID entered. Welcome back')
                 break
             else:
                 print('No user found with the given ID.')
@@ -89,13 +88,16 @@ def user_login():
 
 
 def check_user_id(user_id):
-    c.execute('SELECT * FROM users WHERE id = ?', (user_id,))
+    """
+    Check if the user ID exists in the database.
+    """
+    c.execute('SELECT name FROM users WHERE user_id = ?', (user_id,))
     result = c.fetchone()
     if result is None:
         print('No user found with the given ID.')
         return False
     else:
-        name = result[0]
+        name = result[0] # Extract name from query result
         print(f'User found: Welcome back {name}')
         return True
 
