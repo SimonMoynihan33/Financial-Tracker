@@ -44,5 +44,10 @@ Fix - Check the length of the id input before converting to an int().
 
 ### Bug 03 
 Issue - `NameError: name 'user_id' is not defined` relating to the `check_user_id(user_id)` function. 
-Cause - This was due to user_id not being declared in the current scope
-Fix - 
+Cause - This was due to user_id not being declared in the current scope.
+Fix - `c.excute` line had 'id' instead of 'user_id'. Correctly define it also in user_login.
+
+### Bug 04 
+Issue - When an invalid input is used in the registration screen, it continues on to the log in code instead of going back to the create a code.
+Cause - 
+Fix - Create two while loops to check validate that the name inputted is alphabetical characters only and that it loops back around if not. Same was done for digit input to loop until correct.

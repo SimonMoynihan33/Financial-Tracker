@@ -41,28 +41,34 @@ def register_user():
     """
     Register user with name and unique ID
     """
-    name = input('Enter your name: ')
-    user_id = input('Create a unique 4-digit ID (this cannot be retrieved if forgotten): ')
-
-    # Check if the name is aplhabetical
-    if not name.isalpha():
-        print('Please make sure you use alpabetical characters (a-z) only.')
-        return
+    while True:
+        name = input('Enter your name: ').capitalize()
+        
+        # Check if the name is aplhabetical
+        if not name.isalpha():
+            print('Please make sure you use alpabetical characters (a-z) only.')
+        else:
+            print(f'Welcome {name}')
+            break
     
-    # Check if the user input was a 4 digit code and numeric
-    if len(user_id) == 4 and user_id.isdigit():
-        user_id = int(user_id)
-        try:
-            # Insert user into the database
-            c.execute('INSERT INTO users (name, user_id) VALUES (?, ?)', (name, user_id))
-            conn.commit()
-            print(f'Valid ID entered. Welcome {name}. Registration successful!')
-        except sqlite3.IntegrityError:  # Raises error if ID is in use
-            print('This ID is already in use. Please choose another.')
-        except Exception as e:
-            print(f'An error occurred: {e}')
-    else:
-        print('Invalid ID. It must be 4 digits long.')
+    while True: 
+        user_id = input('Create a unique 4-digit ID (this cannot be retrieved if forgotten): ')
+        # Check if the user input was a 4 digit code and numeric
+        if len(user_id) == 4 and user_id.isdigit():
+            user_id = int(user_id)
+            try:
+                # Insert user into the database
+                c.execute('INSERT INTO users (name, user_id) VALUES (?, ?)', (name, user_id))
+                conn.commit()
+                print(f'Valid ID entered. Welcome {name}.\n'
+                'Registration successful!')
+                break
+            except sqlite3.IntegrityError:  # Raises error if ID is in use
+                print('This ID is already in use. Please choose another.')
+            except Exception as e:
+                print(f'An error occurred: {e}')
+        else:
+            print('Invalid ID. It must be 4 digits long.')
 
     
 def user_login():
@@ -79,7 +85,7 @@ def user_login():
         # Validate and process the user ID
         if len(user_input_id) == 4 and user_input_id.isdigit():
             user_input_id = int(user_input_id) # Convert to integer
-            valid, name = check_user_id(user_id) # Check user ID and recieve both status and name
+            valid, name = check_user_id(user_input_id) # Check user ID and recieve both status and name
             if valid:
                 print(f'Welcome back, {name}')
                 break
@@ -96,11 +102,9 @@ def check_user_id(user_id):
     c.execute('SELECT name FROM users WHERE user_id = ?', (user_id,))
     result = c.fetchone()
     if result is None:
-        print('No user found with the given ID.')
         return False, None # Return false and none for id and name 
     else:
         name = result[0] # Extract name from query result
-        print(f'User found: Welcome back {name}')
         return True, name
 
 greet_msg()
