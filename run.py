@@ -79,7 +79,9 @@ def user_login():
         # Validate and process the user ID
         if len(user_input_id) == 4 and user_input_id.isdigit():
             user_input_id = int(user_input_id) # Convert to integer
-            if check_user_id(user_id):
+            valid, name = check_user_id(user_id) # Check user ID and recieve both status and name
+            if valid:
+                print(f'Welcome back, {name}')
                 break
             else:
                 print('No user found with the given ID.')
@@ -95,11 +97,11 @@ def check_user_id(user_id):
     result = c.fetchone()
     if result is None:
         print('No user found with the given ID.')
-        return False
+        return False, None # Return false and none for id and name 
     else:
         name = result[0] # Extract name from query result
         print(f'User found: Welcome back {name}')
-        return True
+        return True, name
 
 greet_msg()
 
