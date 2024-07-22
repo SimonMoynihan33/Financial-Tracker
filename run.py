@@ -17,6 +17,7 @@ c.execute('''
 ''')
 conn.commit()
 
+
 def greet_msg():
     """
     Message to greet user and ask if they have an account.
@@ -34,14 +35,14 @@ def greet_msg():
             break
         else:
             print('Invalid input. Please enter "y" for yes or "n" for no.')
-        
+
 
 def register_user():
     """
     Register user with name and unique ID
     """
     name = input('Enter your name: ')
-    user_id = int(input('Create a unique 4-digit ID (this cannot be retrieved if forgotten): '))
+    user_id = input('Create a unique 4-digit ID (this cannot be retrieved if forgotten): ')
 
     # Check if the name is aplhabetical
     if not name.isalpha():
@@ -63,6 +64,7 @@ def register_user():
         print('This ID is already in use. Please choose another.')
     except Exception as e:
         print(f'An error occurred: {e}')
+
     
 def user_login():
     """
@@ -70,18 +72,29 @@ def user_login():
     """
     print('Type "BACK" to return to previous page')
     while True:
-        try:
-            user_id = int(input('Please enter your unique 4 digit code'))
-        except ValueError:
-            print('Invalid input. Please enter your unique 4 digit code')
+        user_input_id = input('Please enter your unique 4 digit code: ').strip()
+        if user_input_id == 'BACK':
+            greet_msg() # Return to start function
             continue
 
-        if check_user_id(user_id):
-            print(f'Valid ID. Welcome {name}')
-            break
-        else:
-            print('No user found with the given ID. Please try again')
+        try:
+            user_id = int(user_id)
+            if len(user_input) == 4 and check_user_id(user_id):
+                print(f'Valid ID entered. Welcome back {name}')
+                break
+            else:
+                print('Invalid ID. It must be 4 digits long')
+        except ValueError:
+            print('Invalid input. Please enter a numeric ID')
 
+
+def check_user_id(user_id):
+    c.execute('SELECT * FROM users WHERE id = ?', (user_id,))
+    result = c.fetchone()
+    if result is None:
+        return False
+    else:
+        return True
 
 greet_msg()
 
