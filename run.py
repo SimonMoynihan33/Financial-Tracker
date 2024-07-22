@@ -92,8 +92,11 @@ def check_user_id(user_id):
     c.execute('SELECT * FROM users WHERE id = ?', (user_id,))
     result = c.fetchone()
     if result is None:
+        print('No user found with the given ID.')
         return False
     else:
+        name = result[0]
+        print(f'User found: Welcome back {name}')
         return True
 
 greet_msg()
