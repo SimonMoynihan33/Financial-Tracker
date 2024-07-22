@@ -26,6 +26,7 @@ def greet_msg():
         response = input('Are you already registered? (y/n): ').strip().lower()
         if response == 'y':
             print('Proceeding to login...')
+            user_login()
             break
         elif response == 'n':
             print('You must register to use this app')
@@ -40,7 +41,7 @@ def register_user():
     Register user with name and unique ID
     """
     name = input('Enter your name: ')
-    user_id = input('Create a unique 4-digit ID: ')
+    user_id = int(input('Create a unique 4-digit ID (this cannot be retrieved if forgotten): '))
 
     # Check if the name is aplhabetical
     if not name.isalpha():
@@ -58,11 +59,30 @@ def register_user():
         (name, user_id))
         conn.commit()
         print('Registration successful!')
-    except sqlite3.IntegrityError:
+    except sqlite3.IntegrityError: # Raises error if ID is in use
         print('This ID is already in use. Please choose another.')
     except Exception as e:
         print(f'An error occurred: {e}')
     
+def user_login():
+    """
+    Accepts user login details and retrives data
+    """
+    print('Type "BACK" to return to previous page')
+    while True:
+        try:
+            user_id = int(input('Please enter your unique 4 digit code'))
+        except ValueError:
+            print('Invalid input. Please enter your unique 4 digit code')
+            continue
+
+        if check_user_id(user_id):
+            print(f'Valid ID. Welcome {name}')
+            break
+        else:
+            print('No user found with the given ID. Please try again')
+
+
 greet_msg()
 
 conn.close()
