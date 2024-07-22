@@ -21,16 +21,18 @@ def greet_msg():
     """
     Message to greet user and ask if they have an account.
     """
-    print('NOTE: This app is used for educational purposes only, please do not provide real world \n'
-    'information pertaining to financial details')
     print('Hello World!')
-    response = input('Are you already registered? (y/n): ').lower()
-    if response == 'y':
-        pass
-    elif response == 'n':
-        register_user()
-    else:
-        print('Invalid input. Please enter "y" for yes or "n" for no.')
+    while True:
+        response = input('Are you already registered? (y/n): ').strip().lower()
+        if response == 'y':
+            print('Proceeding to login...')
+            break
+        elif response == 'n':
+            print('You must register to use this app')
+            register_user() # Call registration function
+            break
+        else:
+            print('Invalid input. Please enter "y" for yes or "n" for no.')
         
 
 def register_user():
@@ -38,7 +40,7 @@ def register_user():
     Register user with name and unique ID
     """
     name = input('Enter your name: ')
-    user_id = input('Create a 4-digit ID: ')
+    user_id = input('Create a unique 4-digit ID: ')
 
     # Check if the name is aplhabetical
     if not name.isalpha():
