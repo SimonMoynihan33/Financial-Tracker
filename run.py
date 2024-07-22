@@ -17,14 +17,26 @@ c.execute('''
 ''')
 conn.commit()
 
-def register_user():
+def greet_msg():
     """
-    Register user with name and unique ID
+    Message to greet user and ask if they have an account.
     """
     print('NOTE: This app is used for educational purposes only, please do not provide real world \n'
     'information pertaining to financial details')
     print('Hello World!')
-    print('Please log in / Create an account')
+    response = input('Are you already registered? (y/n): ').lower()
+    if response == 'y':
+        pass
+    elif response == 'n':
+        register_user()
+    else:
+        print('Invalid input. Please enter "y" for yes or "n" for no.')
+        
+
+def register_user():
+    """
+    Register user with name and unique ID
+    """
     name = input('Enter your name: ')
     user_id = input('Create a 4-digit ID: ')
 
@@ -49,6 +61,6 @@ def register_user():
     except Exception as e:
         print(f'An error occurred: {e}')
     
-register_user()
+greet_msg()
 
 conn.close()
