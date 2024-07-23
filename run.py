@@ -140,7 +140,10 @@ def expense_menu():
     Asks user if they wish to log an expense or get a report on financial data
     """
     while True:
-        response = input('Would you like to (1) add an expense, or (2) get a report on recent expenses. Press 1 or 2: ')
+        response = input('Would you like to\n'
+         '(1) add an expense\n'
+         '(2) get a report on recent expenses\n'
+         '')
         if response == '1':
             add_expense()
             break
