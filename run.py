@@ -107,6 +107,26 @@ def check_user_id(user_id):
         name = result[0] # Extract name from query result
         return True, name
 
+
+def expense_menu():
+    """
+    Asks user if they wish to log an expense or get a report on financial data
+    """
+    while True:
+        response = input('Would you like to (1) add an expense, or (2) get a report on recent expenses. Press 1 or 2: ')
+        if response == '1':
+            add_expense()
+            break
+        elif response == '2':
+            get_report()
+            break
+        else:
+            print('Invalid input. Please enter "1" to add an expense or "2" to get a report')
+
+
+
+
+
 greet_msg()
 
 conn.close()
