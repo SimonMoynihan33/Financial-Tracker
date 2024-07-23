@@ -124,6 +124,18 @@ def expense_menu():
             print('Invalid input. Please enter "1" to add an expense or "2" to get a report')
 
 
+def add_expense():
+    """
+    Function to add an expense
+    """
+    amount = float(input('Enter the expense amount: '))
+    
+
+
+def get_report():
+    """
+    Function to get a report on recent expenses that have been logged
+    """
 
 
 
