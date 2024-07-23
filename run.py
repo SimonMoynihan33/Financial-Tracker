@@ -10,6 +10,7 @@ current_user_id = None
 conn = sqlite3.connect('expense_tracker.db')
 c = conn.cursor()
 
+# AI used to create tables and link SQL database
 # Create table 
 c.execute('''
     CREATE TABLE IF NOT EXISTS users (
@@ -20,11 +21,12 @@ c.execute('''
 ''')
 c.execute('''
     CREATE TABLE IF NOT EXISTS expenses (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    amount REAL NOT NULL,
-    category TEXT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (user_id)
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        amount REAL NOT NULL,
+        category TEXT NOT NULL,
+        date TEXT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (user_id)
     )
 ''')
 
@@ -155,12 +157,22 @@ def add_expense():
     """
     amount = float(input('Enter the expense amount: '))
     category = input('Enter the category of the expense: ').capitalize()
+    date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: ')
+    if not date:
+        date = datetime.today().strftime('%d-%m-%Y')
+    else:
+        # Validate date format
+        try:
+            datetime.strptime(date, '%d-%m-%Y')
+        except ValueError:
+            print('Incorrect date format, should be DD-MM-YYYY')
+            return add_expense()
 
     # Insert expenses into database
-    c.execute('INSERT INTO expenses (amount, category) VALUES (?, ?, ?)', (current_user_id, amount, category))
+    c.execute('INSERT INTO expenses (user_id, amount, category, date) VALUES (?, ?, ?, ?)', (current_user_id, amount, category, date))
     conn.commit()
 
-    print(f'Expense of {amount} in category {category} added.')
+    print(f'Expense of {amount} in category {category} added for {date}.')
 
 
 def get_report():
