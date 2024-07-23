@@ -17,6 +17,8 @@ c.execute('''
 ''')
 conn.commit()
 
+# Global variable for user_id
+current_user_id = None
 
 def greet_msg():
     """
@@ -75,6 +77,7 @@ def user_login():
     """
     Accepts user login details and retrives data
     """
+    global current_user_id
     print('Type "BACK" to return to previous page')
     while True:
         user_input_id = input('Please enter your unique 4 digit code: ').strip()
@@ -87,7 +90,9 @@ def user_login():
             user_input_id = int(user_input_id) # Convert to integer
             valid, name = check_user_id(user_input_id) # Check user ID and recieve both status and name
             if valid:
+                current_user_id = user_input_id
                 print(f'Welcome back, {name}')
+                expense_menu()
                 break
             else:
                 print('No user found with the given ID.')
@@ -128,14 +133,15 @@ def add_expense():
     """
     Function to add an expense
     """
+    global current_user_id
     amount = float(input('Enter the expense amount: '))
-    # category = (This will have different categories to choose from)
+    category = input('Enter the category of the expense: ').capitalize
     date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: ')
     if not date:
-        date = datetime.today()strftime('%D-%m-%y')
+        date = datetime.today().strftime('%D-%m-%y')
 
     # Insert expenses into database
-    c.execute('INSERT INTO expenses (user_id, amount, catgory, date) VALUES (?, ?, ?, ?)', (user_id, amount, category, date))
+    c.execute('INSERT INTO expenses (user_id, amount, category, date) VALUES (?, ?, ?, ?)', (current_user_id, amount, category, date))
     conn.commit()
 
     print(f'Expense of {amount} in category {category} on {date} added.')
