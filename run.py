@@ -3,6 +3,9 @@ from datetime import datetime
 import plotly.express as px
 import pandas as pd 
 
+# Global variable for user_id
+current_user_id = None
+
 # Connect to SQL database
 conn = sqlite3.connect('expense_tracker.db')
 c = conn.cursor()
@@ -28,8 +31,7 @@ c.execute('''
 
 conn.commit()
 
-# Global variable for user_id
-current_user_id = None
+
 
 def greet_msg():
     """
@@ -78,6 +80,7 @@ def register_user():
                 conn.commit()
                 print(f'Valid ID entered. Welcome {name}.\n'
                 'Registration successful!')
+                current_user_id = user_id
                 expense_menu()
                 break
             except sqlite3.IntegrityError:  # Raises error if ID is in use
@@ -156,7 +159,14 @@ def add_expense():
     category = input('Enter the category of the expense: ').capitalize()
     date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: ')
     if not date:
-        date = datetime.today().strftime('%D-%m-%y')
+        date = datetime.today().strftime('%d-%m-%Y')
+    else:
+        # Validate date format
+        try:
+            datetime.strptime(date, '%d-%m-%Y')
+        except ValueError:
+            print('Incorrect date format, should be DD-MM-YYYY')
+            return add_expense()
 
     # Insert expenses into database
     c.execute('INSERT INTO expenses (user_id, amount, category, date) VALUES (?, ?, ?, ?)', (current_user_id, amount, category, date))
