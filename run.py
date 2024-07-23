@@ -129,7 +129,16 @@ def add_expense():
     Function to add an expense
     """
     amount = float(input('Enter the expense amount: '))
-    
+    # category = (This will have different categories to choose from)
+    date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: ')
+    if not date:
+        date = datetime.today()strftime('%D-%m-%y')
+
+    # Insert expenses into database
+    c.execute('INSERT INTO expenses (user_id, amount, catgory, date) VALUES (?, ?, ?, ?)', (user_id, amount, category, date))
+    conn.commit()
+
+    print(f'Expense of {amount} in category {category} on {date} added.')
 
 
 def get_report():
