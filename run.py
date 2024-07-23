@@ -22,7 +22,7 @@ c.execute('''
     amount REAL NOT NULL,
     category TEXT NOT NULL,
     date TEXT NOT NULL,
-    FOREIGN KEY (user_id) REFERANCE users (user_id)
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
     )
 ''')
 
@@ -146,7 +146,7 @@ def add_expense():
     """
     global current_user_id
     amount = float(input('Enter the expense amount: '))
-    category = input('Enter the category of the expense: ').capitalize
+    category = input('Enter the category of the expense: ').capitalize()
     date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: ')
     if not date:
         date = datetime.today().strftime('%D-%m-%y')
