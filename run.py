@@ -19,6 +19,7 @@ c.execute('''
         user_id INTEGER NOT NULL UNIQUE
     )
 ''')
+# AI used to create table
 c.execute('''
     CREATE TABLE IF NOT EXISTS expenses (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -82,7 +83,7 @@ def register_user():
                 print(f'Valid ID entered. Welcome {name}.\n'
                 'Registration successful!')
                 current_user_id = user_id
-                expense_menu()
+                user_login()
                 break
             except sqlite3.IntegrityError:  # Raises error if ID is in use
                 print('This ID is already in use. Please choose another.')
@@ -106,7 +107,6 @@ def user_login():
         if user_input_id.upper() == 'BACK':
             greet_msg()
             continue
-
         # Validate and process the user ID
         if len(user_input_id) == 4 and user_input_id.isdigit():
             user_input_id = int(user_input_id)
@@ -155,6 +155,7 @@ def add_expense():
     """
     Function to add an expense
     """
+    global current_user_id
     amount = float(input('Enter the expense amount: '))
     category = input('Enter the category of the expense: ').capitalize()
     date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: ')
@@ -166,8 +167,6 @@ def add_expense():
             datetime.strptime(date, '%d-%m-%Y')
         except ValueError:
             print('Incorrect date format, should be DD-MM-YYYY')
-            return add_expense()
-
     # Insert expenses into database
     c.execute('INSERT INTO expenses (user_id, amount, category, date) VALUES (?, ?, ?, ?)', (current_user_id, amount, category, date))
     conn.commit()

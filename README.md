@@ -53,4 +53,6 @@ Cause -
 Fix - Create two while loops to check validate that the name inputted is alphabetical characters only and that it loops back around if not. Same was done for digit input to loop until correct.
 
 ### Bug 05
-Issue - When a date is put in for an expense, it brings you back to the 'Create a unique 4-digit ID' prompt.
+Issue - When a date is put in for an expense, it brings you back to the 'Create a unique 4-digit ID' prompt. This only happens for a new user who directly goes to add an expense.
+Cause - I did not find the cause for this issue but I was able to find a work around
+Fix - After registration, bring the user back to login prompt to log in, this now allows them to add expenses. 
