@@ -15,6 +15,17 @@ c.execute('''
         user_id INTEGER NOT NULL UNIQUE
     )
 ''')
+c.execute('''
+    CREATE TABLE IF NOT EXISTS expenses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    amount REAL NOT NULL,
+    category TEXT NOT NULL,
+    date TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERANCE users (user_id)
+    )
+''')
+
 conn.commit()
 
 # Global variable for user_id
