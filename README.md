@@ -51,3 +51,6 @@ Fix - `c.excute` line had 'id' instead of 'user_id'. Correctly define it also in
 Issue - When an invalid input is used in the registration screen, it continues on to the log in code instead of going back to the create a code.
 Cause - 
 Fix - Create two while loops to check validate that the name inputted is alphabetical characters only and that it loops back around if not. Same was done for digit input to loop until correct.
+
+### Bug 05
+Issue - When a date is put in for an expense, it brings you back to the 'Create a unique 4-digit ID' prompt.

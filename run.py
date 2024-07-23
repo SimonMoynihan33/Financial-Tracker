@@ -54,11 +54,14 @@ def register_user():
     """
     Register user with name and unique ID
     """
+    print('Type "BACK" to return to previous page')
     while True:
         name = input('Enter your name: ').capitalize()
-        
+        if name.upper() == 'BACK':
+            greet_msg() # Return to start function
+            continue        
         # Check if the name is aplhabetical
-        if not name.isalpha():
+        elif not name.isalpha():
             print('Please make sure you use alpabetical characters (a-z) only.')
         else:
             print(f'Welcome {name}')
@@ -75,11 +78,15 @@ def register_user():
                 conn.commit()
                 print(f'Valid ID entered. Welcome {name}.\n'
                 'Registration successful!')
+                expense_menu()
                 break
             except sqlite3.IntegrityError:  # Raises error if ID is in use
                 print('This ID is already in use. Please choose another.')
             except Exception as e:
                 print(f'An error occurred: {e}')
+        elif user_id == 'BACK':
+            greet_msg() # Return to start function
+            continue
         else:
             print('Invalid ID. It must be 4 digits long.')
 
