@@ -1,5 +1,4 @@
 from datetime import datetime
-import plotly.express as px
 import pandas as pd 
 import gspread
 from google.oauth2.service_account import Credentials
@@ -240,18 +239,17 @@ def get_report():
     global current_user_id
     try:
         records = Expenses.get_all_records()
-        rows = [row for row in records if row['user_id'] == current_user_id]
+        rows = [row for row in records if str(row['user_id']) == str(current_user_id)]
 
-        df = pd.DataFrame(rows, columns=['amount', 'category', 'date'])
+        df = pd.DataFrame(rows, columns=['user_id', 'amount', 'category', 'date'])
+        df['amount'] = df['amount'].astype(float)
         df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y').dt.strftime('%d-%m-%Y')
 
         print("\nRecent Expenses:")
-        print(df)
+        print(df.to_string(index=False))
 
-        fig = px.bar(df, x='category', y='amount', title='Expenses by Category')
         return expense_menu()
     except Exception as e:
         print(f'An error occurred: {e}')
-
 
 greet_msg()
