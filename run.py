@@ -16,8 +16,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('expense_tracker')
 
 # Sheets for users and expenses
-PersonalDetails = sheet.worksheet("users")
-Expenses = sheet.worksheet("expenses")
+PersonalDetails = SHEET.worksheet("user-sheet")
+Expenses = SHEET.worksheet("expenses-sheet")
 # Global variable for user_id
 current_user_id = None
 
@@ -58,7 +58,8 @@ def register_user():
     """
     Register user with name and unique ID
     """
-    print('Type "BACK" to return to previous page')
+    global current_user_id
+    print('Type "BACK" to return to the main menu')
     while True:
         name = input('Enter your name: \n').capitalize()
         if name.upper() == 'BACK':
@@ -77,18 +78,18 @@ def register_user():
         if len(user_id) == 4 and user_id.isdigit():
             user_id = int(user_id)
             try:
-                # Insert user into the database
-                c.execute('INSERT INTO users (name, user_id) VALUES (?, ?)', (name, user_id))
-                conn.commit()
-                print(f'Valid ID entered. Welcome {name}.\n')
-                current_user_id = user_id
-                user_login()
-                break
-            except sqlite3.IntegrityError:  # Raises error if ID is in use
-                print('This ID is already in use. Please choose another.')
+                # Check if user is in database
+                if not PersonalDetails.find(str(user_id), in_column=2):
+                    PersonalDetails.append_row([name, user_id])
+                    print(f'Valid ID entered. Welcome {name}.\n')
+                    current_user_id = user_id
+                    user_login()
+                    return
+                else:
+                    print('This ID is already in use. Please choose another.')
             except Exception as e:
                 print(f'An error occurred: {e}')
-        elif user_id == 'BACK':
+        elif user_id.upper() == 'BACK':
             greet_msg()
             continue
         else:
@@ -114,7 +115,7 @@ def user_login():
                 current_user_id = user_input_id
                 print(f'Welcome back, {name}')
                 expense_menu()
-                break
+                return
             else:
                 print('No user found with the given ID.')
         else:
@@ -125,13 +126,17 @@ def check_user_id(user_id):
     """
     Check if the user ID exists in the database.
     """
-    c.execute('SELECT name FROM users WHERE user_id = ?', (user_id,))
-    result = c.fetchone()
-    if result is None:
-        return False, None
-    else:
-        name = result[0] 
-        return True, name
+    try:
+        cell = PersonalDetails.find(str(user_id), in_column=2)
+        if cell:
+            row = PersonalDetails.row_values(cell.row)
+            return True, row[0]
+        else:
+            return False, None
+    except Exception as e:
+        print(f'An error occurred: {e}')
+        return False, none
+
 
 
 def expense_menu():
@@ -172,9 +177,12 @@ def add_expense():
             datetime.strptime(date, '%d-%m-%Y')
         except ValueError:
             print('Incorrect date format, should be DD-MM-YYYY')
-    # Insert expenses into database
-    c.execute('INSERT INTO expenses (user_id, amount, category, date) VALUES (?, ?, ?, ?)', (current_user_id, amount, category, date))
-    conn.commit()
+            return add_expense()
+    try:
+        Expenses.append_row([current_user_id, amount, category, date])
+        print(f'Expense of {amount} in category {category} on {date} added.')
+    except Exception as e:
+        print(f'An error occurred: {e}')
 
     print(f'Expense of {amount} in category {category} added for {date}.')
 
@@ -187,5 +195,3 @@ def get_report():
 
 
 greet_msg()
-
-conn.close()
