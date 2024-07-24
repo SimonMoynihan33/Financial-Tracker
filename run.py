@@ -206,6 +206,7 @@ def add_expense():
         Expenses.append_row([current_user_id, amount, category, date])
         sleep(1.5)
         print(Fore.GREEN + f'Expense of {amount} in category {category} added for {date}.' + Style.RESET_ALL)
+        expense_menu()
     except Exception as e:
         print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
 
