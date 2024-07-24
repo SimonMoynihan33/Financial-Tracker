@@ -58,17 +58,18 @@ def greet_msg():
     Message to greet user and ask if they have an account.
     """
     while True:
-        response = input('Are you already registered? (y/n): \n').strip().lower()
+        response = input('  Are you already registered? (y/n): \n'
+        '  ').strip().lower()
         if response == 'y':
-            print('\nProceeding to login...')
+            print('\n  Proceeding to login...')
             user_login()
             break
         elif response == 'n':
-            print('\nYou must register to use this app')
+            print('\n  You must register to use this app')
             register_user() 
             break
         else:
-            print(Fore.RED + "Invalid input. Please enter 'y' for yes or 'n' for no." + Style.RESET_ALL)
+            print(Fore.RED + "  Invalid input. Please enter 'y' for yes or 'n' for no." + Style.RESET_ALL)
 
 
 def register_user():
@@ -76,23 +77,25 @@ def register_user():
     Register user with name and unique ID
     """
     global current_user_id
-    print('Type "BACK" to return to the main menu')
+    print('  Type "BACK" to return to the main menu')
     while True:
-        name = input('Enter your name: \n').capitalize()
+        name = input('  Enter your name: \n'
+        '  ').capitalize()
         if name.upper() == 'BACK':
             clear()
             greet_msg()
             continue        
         # Check if the name is aplhabetical
         elif not name.isalpha():
-            print(Fore.RED + 'Please make sure you use alpabetical characters (a-z) only.' +  Style.RESET_ALL)
+            print(Fore.RED + '  Please make sure you use alpabetical characters (a-z) only.' +  Style.RESET_ALL)
         else:
             clear()
-            print(Fore.GREEN + f'Welcome {name}' + Style.RESET_ALL)
+            print(Fore.GREEN + f'  Welcome {name}' + Style.RESET_ALL)
             break
     
     while True: 
-        user_id = input('\nCreate a unique 4-digit ID (this cannot be retrieved if forgotten): \n')
+        user_id = input('\n  Create a unique 4-digit ID (this cannot be retrieved if forgotten): \n'
+        '  ')
         # Check if the user input was a 4 digit code and numeric
         if len(user_id) == 4 and user_id.isdigit():
             user_id = int(user_id)
@@ -101,20 +104,20 @@ def register_user():
                 if not PersonalDetails.find(str(user_id), in_column=2):
                     PersonalDetails.append_row([name, user_id])
                     clear()
-                    print(Fore.GREEN + f'Valid ID entered. Welcome {name}.\n' + Style.RESET_ALL)
+                    print(Fore.GREEN + f'  Valid ID entered. Welcome {name}.\n' + Style.RESET_ALL)
                     current_user_id = user_id
                     sleep(1.5)
                     user_login()
                     return
                 else:
-                    print(Fore.RED + 'This ID is already in use. Please choose another.' + Style.RESET_ALL)
+                    print(Fore.RED + '  This ID is already in use. Please choose another.' + Style.RESET_ALL)
             except Exception as e:
-                print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
+                print(Fore.RED + f'  An error occurred: {e}' + Style.RESET_ALL)
         elif user_id.upper() == 'BACK':
             greet_msg()
             continue
         else:
-            print(Fore.RED + 'Invalid ID. It must be 4 digits long.' + Style.RESET_ALL)
+            print(Fore.RED + '  Invalid ID. It must be 4 digits long.' + Style.RESET_ALL)
 
     
 def user_login():
@@ -122,9 +125,10 @@ def user_login():
     Accepts user login details and retrives data
     """
     global current_user_id
-    print('\nType "BACK" to return to previous page\n')
+    print('\n  Type "BACK" to return to previous page\n')
     while True:
-        user_input_id = input('Please enter your unique 4 digit code: \n').strip()
+        user_input_id = input('  Please enter your unique 4 digit code: \n'
+        '  ').strip()
         if user_input_id.upper() == 'BACK':
             clear()
             greet_msg()
@@ -136,14 +140,14 @@ def user_login():
             if valid:
                 clear()
                 current_user_id = user_input_id
-                print(Fore.GREEN + f'Welcome back, {name}' + Style.RESET_ALL)
+                print(Fore.GREEN + f'  Welcome back, {name}' + Style.RESET_ALL)
                 sleep(2)
                 expense_menu()
                 return
             else:
-                print(Fore.RED + 'No user found with the given ID.' + Style.RESET_ALL)
+                print(Fore.RED + '  No user found with the given ID.' + Style.RESET_ALL)
         else:
-            print(Fore.RED + 'Invalid ID. It must be 4 digits long' + Style.RESET_ALL)
+            print(Fore.RED + '  Invalid ID. It must be 4 digits long' + Style.RESET_ALL)
 
 
 def check_user_id(user_id):
@@ -158,7 +162,7 @@ def check_user_id(user_id):
         else:
             return False, None
     except Exception as e:
-        print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
+        print(Fore.RED + f'  An error occurred: {e}' + Style.RESET_ALL)
         return False, none
 
 
@@ -168,10 +172,12 @@ def expense_menu():
     Asks user if they wish to log an expense or get a report on financial data
     """
     while True:
-        print('\nPress "0" if you wish to log out\n')
-        response = input('Would you like to\n'
-         '(1) add an expense\n'
-         '(2) get a report on recent expenses\n')
+        print('\n  Press "0" if you wish to log out\n'
+        '  ')
+        response = input('  Would you like to\n'
+         '  (1) add an expense\n'
+         '  (2) get a report on recent expenses\n'
+         '  ')
         if response == '1':
             add_expense()
             break
@@ -184,7 +190,7 @@ def expense_menu():
             user_login()
             break
         else:
-            print(Fore.RED + 'Invalid input. Please enter "1" to add an expense or "2" to get a report' + Style.RESET_ALL)
+            print(Fore.RED + '  Invalid input. Please enter "1" to add an expense or "2" to get a report' + Style.RESET_ALL)
 
 
 def add_expense():
@@ -193,18 +199,20 @@ def add_expense():
     """
     global current_user_id
     while True:
-        amount = input('Enter the expense amount: \n').strip()
+        amount = input('  Enter the expense amount: \n'
+        '  ').strip()
         try:
             float(amount)
-            print(Fore.GREEN + f'Amount of {amount}' + Style.RESET_ALL)
+            print(Fore.GREEN + f'  Amount of {amount}' + Style.RESET_ALL)
             break
         except ValueError:
-            print(Fore.RED + 'Input must be a number' + Style.RESET_ALL)   
+            print(Fore.RED + '  Input must be a number' + Style.RESET_ALL)   
 
-    category = input('Enter the category of the expense: \n'
+    category = input('  Enter the category of the expense: \n'
                '          (1) ' + Fore.LIGHTYELLOW_EX + 'Bills' + Style.RESET_ALL + '          (3) ' + Fore.LIGHTBLUE_EX + 'Fun\n' + Style.RESET_ALL + 
                '          (2) ' + Fore.LIGHTCYAN_EX + 'Subscriptions' + Style.RESET_ALL + '  (4) ' + Fore.LIGHTMAGENTA_EX + 'Food\n' + Style.RESET_ALL +
-               '          (5) ' + Fore.LIGHTRED_EX + 'Other\n' + Style.RESET_ALL)
+               '          (5) ' + Fore.LIGHTRED_EX + 'Other\n' + Style.RESET_ALL +
+               '  ')
     category_map = {
         '1': 'Bills',
         '2': 'Subscriptions',
@@ -213,9 +221,10 @@ def add_expense():
         '5': 'Other'
         }
     if category not in category_map:
-            print(Fore.RED + 'Invalid category. Please try again.' + Style.RESET_ALL)
+            print(Fore.RED + '  Invalid category. Please try again.' + Style.RESET_ALL)
             return add_expense()
-    date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: \n')
+    date = input('  Enter the date of expenses (DD-MM-YYYY) or leave blank for today: \n'
+    '  ')
     if not date:
         date = datetime.today().strftime('%d-%m-%Y')
     else:
@@ -223,15 +232,15 @@ def add_expense():
         try:
             datetime.strptime(date, '%d-%m-%Y')
         except ValueError:
-            print(Fore.RED + 'Incorrect date format, should be DD-MM-YYYY' + Style.RESET_ALL)
+            print(Fore.RED + '  Incorrect date format, should be DD-MM-YYYY' + Style.RESET_ALL)
             return add_expense()
     try:
         Expenses.append_row([current_user_id, amount, category_map[category], date])
         sleep(1.5)
-        print(Fore.GREEN + f'Expense of {amount} in category {category_map[category]} added for {date}.' + Style.RESET_ALL)
+        print(Fore.GREEN + f'  Expense of {amount} in category {category_map[category]} added for {date}.' + Style.RESET_ALL)
         expense_menu()
     except Exception as e:
-        print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
+        print(Fore.RED + f'  An error occurred: {e}' + Style.RESET_ALL)
 
 
 def get_report():
@@ -248,12 +257,12 @@ def get_report():
         df['amount'] = df['amount'].astype(float)
         df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y').dt.strftime('%d-%m-%Y')
 
-        print("\nRecent Expenses:")
+        print("\n  Recent Expenses:")
         print(df.to_string(index=False))
 
         return expense_menu()
     except Exception as e:
-        print(f'An error occurred: {e}')
+        print(f'  An error occurred: {e}')
 
 
 logo()
