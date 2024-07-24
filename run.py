@@ -191,12 +191,12 @@ def add_expense():
     global current_user_id
     while True:
         amount = input('Enter the expense amount: \n').strip()
-        if not amount.isdigit():
-            print(Fore.RED + 'Input must be a number' + Style.RESET_ALL)
-        else:
-            amount = int(amount)
+        try:
+            float(amount)
             print(Fore.GREEN + f'Amount of {amount}' + Style.RESET_ALL)
-            break         
+            break
+        except ValueError:
+            print(Fore.RED + 'Input must be a number' + Style.RESET_ALL)   
 
     category = input('Enter the category of the expense: \n'
                '          (1) ' + Fore.LIGHTYELLOW_EX + 'Bills' + Style.RESET_ALL + '          (3) ' + Fore.LIGHTBLUE_EX + 'Fun\n' + Style.RESET_ALL + 
