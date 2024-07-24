@@ -1,6 +1,7 @@
 # Expense Tracker
 
-T
+
+
 [Deployed Project](https://financial-expense-tracker-602c9c911447.herokuapp.com/)
 
 **Table of Contents**
@@ -15,6 +16,7 @@ T
 - [Bugs](#bugs)
 - [Deployment](#deployment)
 - [Credits](#credits)
+  - [Libraries](#libraries)
 
 ## Creating the Heroku app
 
@@ -71,3 +73,30 @@ Fix - Change database to Google Sheets.
 Issue - Cannot validate the expense amount. `AttributeError: 'float' object has no attribute 'isdigit'` error being thrown in the console after an amount is entered.
 Cause - After a Google search I found `.isdigit()` cannot be used with `float()` due to it having decimal points.
 Fix - Add while loop and try statemet to convert the amount to a float after it is entered, given that it is a number and can be converted.
+
+## Credits
+### General Credits
+- ChatGPT used to show the report back to the user as this syntax was foreign to me
+- [StackOverflow](https://stackoverflow.com/) used to answer questions I encountered with bugs and adding colors to the project
+
+### Libraries
+**[gspread](https://docs.gspread.org/en/v6.0.1/)** - Google Sheets Python API.
+  - **Repository:** [gspread on GitHub](https://github.com/burnash/gspread)
+  - **Documentation:** [gspread Documentation](https://gspread.readthedocs.io/en/latest/)
+
+**[pandas](https://pandas.pydata.org/)** - Data analysis and manipulation
+  - **Repository:** [pandas on GitHub](https://github.com/pandas-dev/pandas)
+  - **Documentation:** [pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/)
+
+**[colorama](https://pypi.org/project/colorama/)** - Colored text API
+  - **Repository:** [colorama on GitHub](https://github.com/tartley/colorama)
+  - **Documentation:** [colorama Documentation](https://pypi.org/project/colorama/)
+
+**os** - Part of the Python Standard Library for interacting with the operating system
+  - **Documentation:** [os Documentation](https://docs.python.org/3/library/os.html)
+
+**time** - Part of the Python Standard Library for time-related functions (used for sleep())
+  - **Documentation:** [time Documentation](https://docs.python.org/3/library/time.html)
+
+**datetime** - Part of the Python Standard Library
+  - **Documentation:** [datetime Documentation](https://docs.python.org/3/library/datetime.html)
