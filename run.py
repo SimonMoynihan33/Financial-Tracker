@@ -91,7 +91,7 @@ def register_user():
                     user_login()
                     return
                 else:
-                    print(Fore.RED + 'This ID is already in use. Please choose another.' Style.RESET_ALL)
+                    print(Fore.RED + 'This ID is already in use. Please choose another.' + Style.RESET_ALL)
             except Exception as e:
                 print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
         elif user_id.upper() == 'BACK':
@@ -119,7 +119,7 @@ def user_login():
             if valid:
                 clear()
                 current_user_id = user_input_id
-                print(Fore.GREEN + f'Welcome back, {name}' Style.RESET_ALL)
+                print(Fore.GREEN + f'Welcome back, {name}' + Style.RESET_ALL)
                 expense_menu()
                 return
             else:
@@ -165,7 +165,7 @@ def expense_menu():
             user_login()
             break
         else:
-            print(Fore.RED + 'Invalid input. Please enter "1" to add an expense or "2" to get a report' Style.RESET_ALL)
+            print(Fore.RED + 'Invalid input. Please enter "1" to add an expense or "2" to get a report' + Style.RESET_ALL)
 
 
 def add_expense():
@@ -190,7 +190,7 @@ def add_expense():
     except Exception as e:
         print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
 
-    print(Fore.GREEN + f'Expense of {amount} in category {category} added for {date}.' Style.RESET_ALL)
+    print(Fore.GREEN + f'Expense of {amount} in category {category} added for {date}.' + Style.RESET_ALL)
 
 
 def get_report():
