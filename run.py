@@ -255,7 +255,7 @@ def get_report():
         rows = [row for row in records if str(row['user_id']) == str(current_user_id)]
 
         if not rows:
-            print("You have logged no expenses so far. Let's get started!")
+            print("  You have logged no expenses so far. Let's get started!")
             return expense_menu()
 
         df = pd.DataFrame(rows, columns=['user_id', 'amount', 'category', 'date'])
