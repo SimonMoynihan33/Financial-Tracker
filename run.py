@@ -243,6 +243,7 @@ def get_report():
 
         fig = px.bar(df, x='category', y='amount', title='Expenses by Category')
         fig.show()
+        expense_menu()
     except Exception as e:
         print(f'An error occurred: {e}')
 
