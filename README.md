@@ -46,7 +46,7 @@ As a user some of the things I look for is:
 A user who uses this app has a clear goal in mind. Get control of expenditure. A user who commits to using this app will hope to log and keep track of where their money goes each month, and make necessary changes to this if needed. 
 
 ## Features
-
+### Login Feature
 
 ## Creating the Heroku app
 

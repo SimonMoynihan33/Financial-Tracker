@@ -67,7 +67,7 @@ def greet_msg():
             user_login()
             break
         elif response == 'n':
-            print('\n  You must register to use this app')
+            print('\n  You must register to use this app\n')
             register_user() 
             break
         else:
@@ -79,7 +79,7 @@ def register_user():
     Register user with name and unique ID
     """
     global current_user_id
-    print('  Type "BACK" to return to the main menu')
+    print('  Type "BACK" to return to the main menu\n')
     while True:
         name = input('  Enter your name: \n'
         '  ').capitalize()
