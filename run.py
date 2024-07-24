@@ -194,7 +194,7 @@ def add_expense():
     category = input('Enter the category of the expense: \n'
                '          (1) Bills          (3) Fun\n'
                '          (2) Subscriptions  (4) Food\n'
-               '          (5) Other')
+               '          (5) Other\n')
     category_map = {
         '1': 'Bills',
         '2': 'Subscriptions',
@@ -218,7 +218,7 @@ def add_expense():
     try:
         Expenses.append_row([current_user_id, amount, category, date])
         sleep(1.5)
-        print(Fore.GREEN + f'Expense of {amount} in category {category} added for {date}.' + Style.RESET_ALL)
+        print(Fore.GREEN + f'Expense of {amount} in category {category_map[category]} added for {date}.' + Style.RESET_ALL)
         expense_menu()
     except Exception as e:
         print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
