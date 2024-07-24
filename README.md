@@ -130,3 +130,6 @@ Fix - Add while loop and try statemet to convert the amount to a float after it 
 
 **datetime** - Part of the Python Standard Library
   - **Documentation:** [datetime Documentation](https://docs.python.org/3/library/datetime.html)
+
+### Specific Credits
+**Clear()** function - [Geeks for Geeks](https://www.geeksforgeeks.org/clear-screen-python/)

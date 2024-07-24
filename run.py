@@ -26,8 +26,6 @@ Expenses = SHEET.worksheet("expenses-sheet")
 # Global variable for user_id
 current_user_id = None
 
-init()
-
 
 # define our clear function CREDS (https://www.geeksforgeeks.org/clear-screen-python/)
 def clear():
