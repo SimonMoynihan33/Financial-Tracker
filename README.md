@@ -60,3 +60,7 @@ Fix - Create two while loops to check validate that the name inputted is alphabe
 Issue - When a date is put in for an expense, it brings you back to the 'Create a unique 4-digit ID' prompt. This only happens for a new user who directly goes to add an expense.
 Cause - I did not find the cause for this issue but I was able to find a work around
 Fix - After registration, bring the user back to login prompt to log in, this now allows them to add expenses. 
+
+### Bug 06
+Issue - Heroku does not support SQLite3 database
+Fix - Change database to Google Sheets
