@@ -216,7 +216,7 @@ def add_expense():
             print(Fore.RED + 'Incorrect date format, should be DD-MM-YYYY' + Style.RESET_ALL)
             return add_expense()
     try:
-        Expenses.append_row([current_user_id, amount, category, date])
+        Expenses.append_row([current_user_id, amount, category_map[category], date])
         sleep(1.5)
         print(Fore.GREEN + f'Expense of {amount} in category {category_map[category]} added for {date}.' + Style.RESET_ALL)
         expense_menu()
