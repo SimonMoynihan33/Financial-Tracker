@@ -41,17 +41,17 @@ def greet_msg():
     """
     print('Hello World!')
     while True:
-        response = input('Are you already registered? (y/n): ').strip().lower()
+        response = input('Are you already registered? (y/n): \n').strip().lower()
         if response == 'y':
-            print('Proceeding to login...')
+            print('\nProceeding to login...')
             user_login()
             break
         elif response == 'n':
-            print('You must register to use this app')
+            print('\nYou must register to use this app')
             register_user() 
             break
         else:
-            print('Invalid input. Please enter "y" for yes or "n" for no.')
+            print('[red]Invalid input. Please enter "y" for yes or "n" for no.[/]')
 
 
 def register_user():
@@ -60,7 +60,7 @@ def register_user():
     """
     print('Type "BACK" to return to previous page')
     while True:
-        name = input('Enter your name: ').capitalize()
+        name = input('Enter your name: \n').capitalize()
         if name.upper() == 'BACK':
             greet_msg()
             continue        
@@ -72,7 +72,7 @@ def register_user():
             break
     
     while True: 
-        user_id = input('Create a unique 4-digit ID (this cannot be retrieved if forgotten): ')
+        user_id = input('\nCreate a unique 4-digit ID (this cannot be retrieved if forgotten): \n')
         # Check if the user input was a 4 digit code and numeric
         if len(user_id) == 4 and user_id.isdigit():
             user_id = int(user_id)
@@ -80,8 +80,7 @@ def register_user():
                 # Insert user into the database
                 c.execute('INSERT INTO users (name, user_id) VALUES (?, ?)', (name, user_id))
                 conn.commit()
-                print(f'Valid ID entered. Welcome {name}.\n'
-                'Registration successful!')
+                print(f'Valid ID entered. Welcome {name}.\n')
                 current_user_id = user_id
                 user_login()
                 break
@@ -101,9 +100,9 @@ def user_login():
     Accepts user login details and retrives data
     """
     global current_user_id
-    print('Type "BACK" to return to previous page')
+    print('\nType "BACK" to return to previous page\n')
     while True:
-        user_input_id = input('Please enter your unique 4 digit code: ').strip()
+        user_input_id = input('Please enter your unique 4 digit code: \n').strip()
         if user_input_id.upper() == 'BACK':
             greet_msg()
             continue
@@ -140,15 +139,18 @@ def expense_menu():
     Asks user if they wish to log an expense or get a report on financial data
     """
     while True:
+        print('\nPress "0" if you wish to log out\n')
         response = input('Would you like to\n'
          '(1) add an expense\n'
-         '(2) get a report on recent expenses\n'
-         '')
+         '(2) get a report on recent expenses\n')
         if response == '1':
             add_expense()
             break
         elif response == '2':
             get_report()
+            break
+        elif response == '0':
+            user_login()
             break
         else:
             print('Invalid input. Please enter "1" to add an expense or "2" to get a report')
@@ -159,9 +161,9 @@ def add_expense():
     Function to add an expense
     """
     global current_user_id
-    amount = float(input('Enter the expense amount: '))
-    category = input('Enter the category of the expense: ').capitalize()
-    date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: ')
+    amount = float(input('Enter the expense amount: \n'))
+    category = input('Enter the category of the expense: \n').capitalize()
+    date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: \n')
     if not date:
         date = datetime.today().strftime('%d-%m-%Y')
     else:

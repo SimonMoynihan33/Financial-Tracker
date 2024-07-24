@@ -1,14 +1,18 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Expense Tracker
 
-Welcome,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 14, 2024**
-
-## Reminders
-
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+**Table of Contents**
+- [Creation Structure](#creation-structure)
+- [User Experience](#user-experience)
+- [Goals](#goals)
+- [Features](#features)
+  - [Validation Errors](#validation-errors)
+- [Design](#design)
+- [Future Deployment](future_deployment)
+- [Testing](#testing)
+- [Bugs](#bugs)
+- [Deployment](#deployment)
+- [Credits](#credits)
 
 ## Creating the Heroku app
 
