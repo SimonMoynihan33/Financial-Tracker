@@ -3,6 +3,8 @@ import plotly.express as px
 import pandas as pd 
 import gspread
 from google.oauth2.service_account import Credentials
+# Got from stackoverflow (https://stackoverflow.com/questions/20291601/how-do-i-import-colors)
+from livewires import games, color
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
