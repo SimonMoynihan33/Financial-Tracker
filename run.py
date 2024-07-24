@@ -46,11 +46,11 @@ def logo():
     """
     Function to print logo for app
     """
-    print( Fore.GREEN + '=============================================================================\n' + Style.RESET_ALL +
+    print( Fore.GREEN + '  =============================================================================\n' + Style.RESET_ALL +
     ' \n' +
-    Fore.BLUE + '                  Welcome to your personal expenses tracker!                  \n' + Style.RESET_ALL + 
+    Fore.BLUE + '                    Welcome to your personal expenses tracker!                    \n' + Style.RESET_ALL + 
     ' \n' +
-    Fore.GREEN + '=============================================================================\n' + Style.RESET_ALL)
+    Fore.GREEN + '  =============================================================================\n' + Style.RESET_ALL)
 
 
 def greet_msg():
