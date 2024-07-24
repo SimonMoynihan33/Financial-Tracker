@@ -299,8 +299,8 @@ def add_expense():
         sleep(1.5)
         print(
             Fore.GREEN +
-            f'  Expense of {amount} in category {
-                category_map[category]} added for {date}.' +
+            f'  Expense of {amount} in category \
+                {category_map[category]} added for {date}.' +
             Style.RESET_ALL)
         expense_menu()
     except Exception as e:
