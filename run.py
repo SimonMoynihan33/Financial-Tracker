@@ -192,9 +192,19 @@ def add_expense():
     global current_user_id
     amount = float(input('Enter the expense amount: \n'))
     category = input('Enter the category of the expense: \n'
-    '          (1) Bills          (3) Fun\n'
-    '          (2) Subscriptions  (4) Food\n'
-    '          (5) Other')
+               '          (1) Bills          (3) Fun\n'
+               '          (2) Subscriptions  (4) Food\n'
+               '          (5) Other')
+    category_map = {
+        '1': 'Bills',
+        '2': 'Subscriptions',
+        '3': 'Fun',
+        '4': 'Food',
+        '5': 'Other'
+        }
+    if category not in category_map:
+            print(Fore.RED + 'Invalid category. Please try again.' + Style.RESET_ALL)
+            return add_expense()
     date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: \n')
     if not date:
         date = datetime.today().strftime('%d-%m-%Y')
