@@ -14,8 +14,25 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('expense_tracker')
+
+# Sheets for users and expenses
+PersonalDetails = sheet.worksheet("users")
+Expenses = sheet.worksheet("expenses")
 # Global variable for user_id
 current_user_id = None
+
+
+def clear():
+    """
+    Clear function to clear screen
+    """
+    print("\n" * 100)
+
+def print_logo():
+    """
+    Function to print logo for app
+    """
+    print("Expense Tracker Logo")  # Placeholder for logo function
 
 
 def greet_msg():
