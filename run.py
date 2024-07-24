@@ -69,6 +69,7 @@ def register_user():
         elif not name.isalpha():
             print('Please make sure you use alpabetical characters (a-z) only.')
         else:
+            clear()
             print(f'Welcome {name}')
             break
     
@@ -81,6 +82,7 @@ def register_user():
                 # Check if user is in database
                 if not PersonalDetails.find(str(user_id), in_column=2):
                     PersonalDetails.append_row([name, user_id])
+                    clear()
                     print(f'Valid ID entered. Welcome {name}.\n')
                     current_user_id = user_id
                     user_login()
@@ -112,6 +114,7 @@ def user_login():
             user_input_id = int(user_input_id)
             valid, name = check_user_id(user_input_id) # Check user ID and recieve both status and name
             if valid:
+                clear()
                 current_user_id = user_input_id
                 print(f'Welcome back, {name}')
                 expense_menu()
@@ -144,6 +147,7 @@ def expense_menu():
     Asks user if they wish to log an expense or get a report on financial data
     """
     while True:
+        clear()
         print('\nPress "0" if you wish to log out\n')
         response = input('Would you like to\n'
          '(1) add an expense\n'
@@ -180,7 +184,6 @@ def add_expense():
             return add_expense()
     try:
         Expenses.append_row([current_user_id, amount, category, date])
-        print(f'Expense of {amount} in category {category} on {date} added.')
     except Exception as e:
         print(f'An error occurred: {e}')
 
