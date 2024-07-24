@@ -3,8 +3,8 @@ import plotly.express as px
 import pandas as pd 
 import gspread
 from google.oauth2.service_account import Credentials
-# Got from stackoverflow (https://stackoverflow.com/questions/20291601/how-do-i-import-colors)
-from livewires import games, color
+# Import colorama (https://sparkbyexamples.com/python/print-colored-text-to-the-terminal-in-python/#:~:text=ANSI%20Escape%20Sequences%20to%20Add%20Color%20to%20Terminal%20Output&text=The%20escape%20sequence%20for%20setting,followed%20by%20the%20letter%20m%20.)
+from colorama import init, Fore, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -23,6 +23,7 @@ Expenses = SHEET.worksheet("expenses-sheet")
 # Global variable for user_id
 current_user_id = None
 
+init()
 
 def clear():
     """
@@ -53,7 +54,7 @@ def greet_msg():
             register_user() 
             break
         else:
-            print('[red]Invalid input. Please enter "y" for yes or "n" for no.[/]')
+            print(Fore.RED + "Invalid input. Please enter 'y' for yes or 'n' for no." + Style.RESET_ALL)
 
 
 def register_user():
