@@ -57,6 +57,7 @@ def greet_msg():
     """
     Message to greet user and ask if they have an account.
     """
+    logo()
     while True:
         response = input('  Are you already registered? (y/n): \n'
         '  ').strip().lower()
@@ -253,6 +254,10 @@ def get_report():
         records = Expenses.get_all_records()
         rows = [row for row in records if str(row['user_id']) == str(current_user_id)]
 
+        if not rows:
+            print("You have logged no expenses so far. Let's get started!")
+            return expense_menu()
+
         df = pd.DataFrame(rows, columns=['user_id', 'amount', 'category', 'date'])
         df['amount'] = df['amount'].astype(float)
         df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y').dt.strftime('%d-%m-%Y')
@@ -265,5 +270,4 @@ def get_report():
         print(f'  An error occurred: {e}')
 
 
-logo()
 greet_msg()
