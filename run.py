@@ -1,38 +1,21 @@
-import sqlite3
 from datetime import datetime
 import plotly.express as px
 import pandas as pd 
+import gspread
+from google.oauth2.service_account import Credentials
 
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('expense_tracker')
 # Global variable for user_id
 current_user_id = None
-
-# Connect to SQL database
-conn = sqlite3.connect('expense_tracker.db')
-c = conn.cursor()
-
-# AI used to create tables and link SQL database
-# Create table 
-c.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        user_id INTEGER NOT NULL UNIQUE
-    )
-''')
-# AI used to create table
-c.execute('''
-    CREATE TABLE IF NOT EXISTS expenses (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER NOT NULL,
-        amount REAL NOT NULL,
-        category TEXT NOT NULL,
-        date TEXT NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users (user_id)
-    )
-''')
-
-conn.commit()
-
 
 
 def greet_msg():
