@@ -192,9 +192,9 @@ def add_expense():
     global current_user_id
     amount = float(input('Enter the expense amount: \n'))
     category = input('Enter the category of the expense: \n'
-               '          (1) Bills          (3) Fun\n'
-               '          (2) Subscriptions  (4) Food\n'
-               '          (5) Other\n')
+               '          (1) ' + Fore.LIGHTYELLOW_EX + 'Bills' + Style.RESET_ALL + '          (3) ' + Fore.LIGHTBLUE_EX + 'Fun\n' + Style.RESET_ALL + 
+               '          (2) ' + Fore.LIGHTCYAN_EX + 'Subscriptions' + Style.RESET_ALL + '  (4) ' + Fore.LIGHTMAGENTA_EX + 'Food\n' + Style.RESET_ALL +
+               '          (5) ' + Fore.LIGHTWHITE_EX + 'Other\n' + Style.RESET_ALL)
     category_map = {
         '1': 'Bills',
         '2': 'Subscriptions',
@@ -228,7 +228,7 @@ def add_expense():
 def get_report():
     """
     Function to get a report on recent expenses that have been logged
-    Written by ChatGPT
+    Function written by ChatGPT
     """
     global current_user_id
     try:
