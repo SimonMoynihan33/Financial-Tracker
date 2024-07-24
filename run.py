@@ -63,6 +63,7 @@ def greet_msg():
         '  ').strip().lower()
         if response == 'y':
             print('\n  Proceeding to login...')
+            sleep(1)
             user_login()
             break
         elif response == 'n':
@@ -250,6 +251,8 @@ def get_report():
     Function written by ChatGPT
     """
     global current_user_id
+    print('\n  Fetching data...\n')
+    sleep(1.5)
     try:
         records = Expenses.get_all_records()
         rows = [row for row in records if str(row['user_id']) == str(current_user_id)]
@@ -260,10 +263,17 @@ def get_report():
 
         df = pd.DataFrame(rows, columns=['user_id', 'amount', 'category', 'date'])
         df['amount'] = df['amount'].astype(float)
-        df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y').dt.strftime('%d-%m-%Y')
+        df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y')
 
-        print("\n  Recent Expenses:")
-        print(df.to_string(index=False))
+        # Extract month and year from the date
+        df['month_year'] = df['date'].dt.to_period('M')
+        # Group by month and category
+        grouped = df.groupby(['year_month', 'category']).agg({'amount': 'sum'}).reset_index()
+        # Sort the grouped data
+        grouped = grouped.sort_values(by=['month_year', 'category'])
+        
+        print("\n  Recent Expenses (Grouped by Month and Category):")
+        print(grouped.to_string(index=False))
 
         return expense_menu()
     except Exception as e:
