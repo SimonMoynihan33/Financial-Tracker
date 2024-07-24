@@ -59,14 +59,14 @@ Fix - Create two while loops to check validate that the name inputted is alphabe
 
 ### Bug 05
 Issue - When a date is put in for an expense, it brings you back to the 'Create a unique 4-digit ID' prompt. This only happens for a new user who directly goes to add an expense.
-Cause - I did not find the cause for this issue but I was able to find a work around
+Cause - I did not find the cause for this issue but I was able to find a work around.
 Fix - After registration, bring the user back to login prompt to log in, this now allows them to add expenses. 
 
 ### Bug 06
-Issue - Heroku does not support SQLite3 database
-Fix - Change database to Google Sheets
+Issue - Heroku does not support SQLite3 database.
+Fix - Change database to Google Sheets.
 
 ### Bug 07 
 Issue - Cannot validate the expense amount. `AttributeError: 'float' object has no attribute 'isdigit'` error being thrown in the console after an amount is entered.
 Cause - After a Google search I found `.isdigit()` cannot be used with `float()` due to it having decimal points.
-Fix - 
+Fix - Add while loop and try statemet to convert the amount to a float after it is entered, given that it is a number and can be converted.

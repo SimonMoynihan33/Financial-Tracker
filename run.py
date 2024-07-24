@@ -42,18 +42,21 @@ def clear():
         _ = system('clear')
         
 
-def print_logo():
+def logo():
     """
     Function to print logo for app
     """
-    print("Expense Tracker Logo")  # Placeholder for logo function
+    print( Fore.GREEN + '=============================================================================\n' + Style.RESET_ALL +
+    ' \n' +
+    Fore.BLUE + '                  Welcome to your personal expenses tracker!\n                  ' + Style.RESET_ALL + 
+    ' \n' +
+    Fore.GREEN + '=============================================================================\n' + Style.RESET_ALL)
 
 
 def greet_msg():
     """
     Message to greet user and ask if they have an account.
     """
-    print('Hello World!')
     while True:
         response = input('Are you already registered? (y/n): \n').strip().lower()
         if response == 'y':
@@ -252,4 +255,6 @@ def get_report():
     except Exception as e:
         print(f'An error occurred: {e}')
 
+
+logo()
 greet_msg()
