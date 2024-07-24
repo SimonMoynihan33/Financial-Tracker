@@ -191,7 +191,10 @@ def add_expense():
     """
     global current_user_id
     amount = float(input('Enter the expense amount: \n'))
-    category = input('Enter the category of the expense: \n').capitalize()
+    category = input('Enter the category of the expense: \n'
+    '          (1) Bills          (3) Fun\n'
+    '          (2) Subscriptions  (4) Food\n'
+    '          (5) Other')
     date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: \n')
     if not date:
         date = datetime.today().strftime('%d-%m-%Y')
@@ -215,7 +218,24 @@ def add_expense():
 def get_report():
     """
     Function to get a report on recent expenses that have been logged
+    Written by ChatGPT
     """
+    global current_user_id
+    try:
+        records = Expenses.get_all_records()
+        rows = [row for row in records if row['user_id'] == current_user_id]
+
+        df = pd.DataFrame(rows, columns=['amount', 'category', 'date'])
+        df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y').dt.strftime('%d-%m-%Y')
+
+        print("\nRecent Expenses:")
+        print(df)
+
+        fig = px.bar(df, x='category', y='amount', title='Expenses by Category')
+        fig.show()
+    except Exception as e:
+        print(f'An error occurred: {e}')
+
 
 
 
