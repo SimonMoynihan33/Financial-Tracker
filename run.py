@@ -268,7 +268,7 @@ def get_report():
         # Extract month and year from the date
         df['month_year'] = df['date'].dt.to_period('M')
         # Group by month and category
-        grouped = df.groupby(['year_month', 'category']).agg({'amount': 'sum'}).reset_index()
+        grouped = df.groupby(['month_year', 'category']).agg({'amount': 'sum'}).reset_index()
         # Sort the grouped data
         grouped = grouped.sort_values(by=['month_year', 'category'])
         
