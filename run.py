@@ -150,7 +150,6 @@ def expense_menu():
     Asks user if they wish to log an expense or get a report on financial data
     """
     while True:
-        clear()
         print('\nPress "0" if you wish to log out\n')
         response = input('Would you like to\n'
          '(1) add an expense\n'
