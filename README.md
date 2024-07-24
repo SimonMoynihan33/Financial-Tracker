@@ -65,3 +65,8 @@ Fix - After registration, bring the user back to login prompt to log in, this no
 ### Bug 06
 Issue - Heroku does not support SQLite3 database
 Fix - Change database to Google Sheets
+
+### Bug 07 
+Issue - Cannot validate the expense amount. `AttributeError: 'float' object has no attribute 'isdigit'` error being thrown in the console after an amount is entered.
+Cause - After a Google search I found `.isdigit()` cannot be used with `float()` due to it having decimal points.
+Fix - 

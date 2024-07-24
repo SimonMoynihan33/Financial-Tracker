@@ -190,7 +190,15 @@ def add_expense():
     Function to add an expense
     """
     global current_user_id
-    amount = float(input('Enter the expense amount: \n'))
+    while True:
+        amount = input('Enter the expense amount: \n').strip()
+        if not amount.isdigit():
+            print(Fore.RED + 'Input must be a number' + Style.RESET_ALL)
+        else:
+            amount = int(amount)
+            print(Fore.GREEN + f'Amount of {amount}' + Style.RESET_ALL)
+            break         
+
     category = input('Enter the category of the expense: \n'
                '          (1) ' + Fore.LIGHTYELLOW_EX + 'Bills' + Style.RESET_ALL + '          (3) ' + Fore.LIGHTBLUE_EX + 'Fun\n' + Style.RESET_ALL + 
                '          (2) ' + Fore.LIGHTCYAN_EX + 'Subscriptions' + Style.RESET_ALL + '  (4) ' + Fore.LIGHTMAGENTA_EX + 'Food\n' + Style.RESET_ALL +
@@ -241,12 +249,9 @@ def get_report():
         print(df)
 
         fig = px.bar(df, x='category', y='amount', title='Expenses by Category')
-        fig.show()
-        expense_menu()
+        return expense_menu
     except Exception as e:
         print(f'An error occurred: {e}')
-
-
 
 
 greet_msg()
