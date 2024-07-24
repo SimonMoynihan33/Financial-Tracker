@@ -3,8 +3,12 @@ import plotly.express as px
 import pandas as pd 
 import gspread
 from google.oauth2.service_account import Credentials
-# Import colorama (https://sparkbyexamples.com/python/print-colored-text-to-the-terminal-in-python/#:~:text=ANSI%20Escape%20Sequences%20to%20Add%20Color%20to%20Terminal%20Output&text=The%20escape%20sequence%20for%20setting,followed%20by%20the%20letter%20m%20.)
+# Import colorama CREDS (https://sparkbyexamples.com/python/print-colored-text-to-the-terminal-in-python/#:~:text=ANSI%20Escape%20Sequences%20to%20Add%20Color%20to%20Terminal%20Output&text=The%20escape%20sequence%20for%20setting,followed%20by%20the%20letter%20m%20.)
 from colorama import init, Fore, Style
+# Import only system from os
+from os import system, name
+from time import sleep
+ 
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -25,11 +29,19 @@ current_user_id = None
 
 init()
 
+
+# define our clear function CREDS (https://www.geeksforgeeks.org/clear-screen-python/)
 def clear():
     """
     Clear function to clear screen
     """
-    print("\n" * 100)
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
+        
 
 def print_logo():
     """
@@ -66,6 +78,7 @@ def register_user():
     while True:
         name = input('Enter your name: \n').capitalize()
         if name.upper() == 'BACK':
+            clear()
             greet_msg()
             continue        
         # Check if the name is aplhabetical
@@ -88,6 +101,7 @@ def register_user():
                     clear()
                     print(Fore.GREEN + f'Valid ID entered. Welcome {name}.\n' + Style.RESET_ALL)
                     current_user_id = user_id
+                    sleep(1.5)
                     user_login()
                     return
                 else:
@@ -110,6 +124,7 @@ def user_login():
     while True:
         user_input_id = input('Please enter your unique 4 digit code: \n').strip()
         if user_input_id.upper() == 'BACK':
+            clear()
             greet_msg()
             continue
         # Validate and process the user ID
@@ -120,6 +135,7 @@ def user_login():
                 clear()
                 current_user_id = user_input_id
                 print(Fore.GREEN + f'Welcome back, {name}' + Style.RESET_ALL)
+                sleep(2)
                 expense_menu()
                 return
             else:
@@ -161,6 +177,8 @@ def expense_menu():
             get_report()
             break
         elif response == '0':
+            clear()
+            sleep(1.5)
             user_login()
             break
         else:
@@ -186,10 +204,11 @@ def add_expense():
             return add_expense()
     try:
         Expenses.append_row([current_user_id, amount, category, date])
+        sleep(1.5)
+        print(Fore.GREEN + f'Expense of {amount} in category {category} added for {date}.' + Style.RESET_ALL)
     except Exception as e:
         print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
 
-    print(Fore.GREEN + f'Expense of {amount} in category {category} added for {date}.' + Style.RESET_ALL)
 
 
 def get_report():
