@@ -48,7 +48,7 @@ def logo():
     """
     print( Fore.GREEN + '=============================================================================\n' + Style.RESET_ALL +
     ' \n' +
-    Fore.BLUE + '                  Welcome to your personal expenses tracker!\n                  ' + Style.RESET_ALL + 
+    Fore.BLUE + '                  Welcome to your personal expenses tracker!                  \n' + Style.RESET_ALL + 
     ' \n' +
     Fore.GREEN + '=============================================================================\n' + Style.RESET_ALL)
 
