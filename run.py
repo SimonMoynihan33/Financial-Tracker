@@ -194,8 +194,7 @@ def add_expense():
     category = input('Enter the category of the expense: \n'
                '          (1) ' + Fore.LIGHTYELLOW_EX + 'Bills' + Style.RESET_ALL + '          (3) ' + Fore.LIGHTBLUE_EX + 'Fun\n' + Style.RESET_ALL + 
                '          (2) ' + Fore.LIGHTCYAN_EX + 'Subscriptions' + Style.RESET_ALL + '  (4) ' + Fore.LIGHTMAGENTA_EX + 'Food\n' + Style.RESET_ALL +
-               '          (5) ' + Fore.LIGHTRED_EX + 'Other\n' + Style.RESET_ALL + 
-               '          (6) ' + Fore.LIGHTWHITE_EX + 'Create a new category\n' + Style.RESET_ALL)
+               '          (5) ' + Fore.LIGHTRED_EX + 'Other\n' + Style.RESET_ALL)
     category_map = {
         '1': 'Bills',
         '2': 'Subscriptions',
@@ -203,10 +202,7 @@ def add_expense():
         '4': 'Food',
         '5': 'Other'
         }
-    if category == '6':
-        create_cat()
-        return add_expense()
-    elif category not in category_map:
+    if category not in category_map:
             print(Fore.RED + 'Invalid category. Please try again.' + Style.RESET_ALL)
             return add_expense()
     date = input('Enter the date of expenses (DD-MM-YYYY) or leave blank for today: \n')
@@ -226,12 +222,6 @@ def add_expense():
         expense_menu()
     except Exception as e:
         print(Fore.RED + f'An error occurred: {e}' + Style.RESET_ALL)
-
-
-def create_cat():
-    """
-    Allows user to create new category themselves
-    """
 
 
 def get_report():
