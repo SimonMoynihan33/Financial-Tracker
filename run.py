@@ -72,8 +72,8 @@ def greet_msg():
     """
     logo()
     while True:
-        response = input("  Are you already registered? (y/n): \n" "  ")
-        .strip().lower()
+        response = input("  Are you already registered? (y/n): \n" " \
+             ").strip().lower()
         if response == "y":
             print("\n  Proceeding to login...")
             sleep(1)
