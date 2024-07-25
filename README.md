@@ -115,6 +115,10 @@ Happy coding!
             + Style.RESET_ALL)``` In delete_expense function throwing error.
 - **Cause** - Indentation was incorrect.
 
+### Bug 09 
+- **Issue** - Cannot get delete_expense function to show
+- **Cause**
+
 ## Credits
 ### General Credits
 - ChatGPT used to show the report back to the user as this syntax was foreign to me

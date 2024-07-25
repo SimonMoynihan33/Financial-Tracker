@@ -11,7 +11,7 @@ from colorama import init, Fore, Style
 from os import system, name
 from time import sleep
 
-
+# Google sheets credentials and setup
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -26,6 +26,7 @@ SHEET = GSPREAD_CLIENT.open("expense_tracker")
 # Sheets for users and expenses
 PersonalDetails = SHEET.worksheet("user-sheet")
 Expenses = SHEET.worksheet("expenses-sheet")
+
 # Global variable for user_id
 current_user_id = None
 
@@ -55,8 +56,8 @@ def logo():
         + Style.RESET_ALL
         + " \n"
         + Fore.BLUE
-        + "                    Welcome to your personal expenses tracker!  \
-                              \n"
+        + "                    Welcome to your personal expenses tracker!  "
+        + "                      \n"
         + Style.RESET_ALL
         + " \n"
         + Fore.GREEN
@@ -107,7 +108,7 @@ def register_user():
         elif not name.isalpha():
             print(
                 Fore.RED
-                + "  Please make sure you use alpabetical characters " +
+                + "  Please make sure you use alphabetical characters " +
                 "(a-z) only."
                 + Style.RESET_ALL
             )
@@ -212,7 +213,7 @@ def expense_menu():
     Asks user if they wish to log an expense or get a report on financial data
     """
     while True:
-        print('\n  Press "0" if you wish to log out\n' "  ")
+        print('\n  Press "0" if you wish to log out\n  ')
         response = input(
             '  Would you like to\n'
             '  (1) add an expense\n'
@@ -220,7 +221,7 @@ def expense_menu():
             '  (3) list expenses\n'
             '  (4) delete an expense\n'
             '  '
-        )
+        ).strip()
         if response == '1':
             add_expense()
             break
@@ -243,7 +244,6 @@ def expense_menu():
                 Fore.RED
                 + '  Invalid input. Please enter "1", "2", "3", '
                 ' "4" or "0" to log out.'
-                + ' to get a report'
                 + Style.RESET_ALL
             )
 
@@ -254,9 +254,9 @@ def add_expense():
     """
     global current_user_id
     while True:
-        amount = input("  Enter the expense amount: \n" "  ").strip()
+        amount = input("  Enter the expense amount: \n  ").strip()
         try:
-            float(amount)
+            amount = float(amount)
             print(Fore.GREEN + f"  Amount of {amount}" + Style.RESET_ALL)
             break
         except ValueError:
@@ -413,16 +413,20 @@ def delete_expense():
     """
     Function to delete a specific expense by its index
     """
-    while True:
-        df = list_expenses()
-        if df is None:
-            return
+    global current_user_id
+    df = list_expenses()
+    if df is None or df.empty:
+        print('  You have nothing to delete!')
+        print('  Returning...')
+        sleep(1)
+        return expense_menu()
 
+    while True:
         try:
-            index = int(input("\n  Enter the index of the expense to"
-                        + " delete: ").strip())
+            index = int(
+                input("\n  Enter the index of the expense to delete: ").strip())
             if index in df.index:
-                row_to_delete = df.iloc[index]
+                row_to_delete = df.loc[index]
                 cell = Expenses.find(str(row_to_delete['date']))
                 Expenses.delete_rows(cell.row)
                 print(
@@ -432,12 +436,13 @@ def delete_expense():
                 )
                 break
             else:
-                print('  Invalid index. Please try again.')
+                print(Fore.RED + '  Invalid index. Please try again.' + Style.RESET_ALL)
         except ValueError:
-            print('  Invalid input. Please enter a valid index.')
+            print(Fore.RED + '  Invalid input. Please enter a valid index.'
+            + Style.RESET_ALL)
         except Exception as e:
-            print(f'  An error occurred: {e}')
-        return expense_menu()
+            print(Fore.RED + f'  An error occurred: {e}' + Style.RESET_ALL)
+    return expense_menu()
 
 
 greet_msg()
