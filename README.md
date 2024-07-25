@@ -108,6 +108,13 @@ Happy coding!
 - **Cause** - After a Google search I found `.isdigit()` cannot be used with `float()` due to it having decimal points.
 - **Fix** - Add while loop and try statemet to convert the amount to a float after it is entered, given that it is a number and can be converted.
 
+### Bug 08
+- **Issue** - ```print(
+            Fore.GREEN
+            + f'  Expense on {row_to_delete["date"]} deleted successfully'
+            + Style.RESET_ALL)``` In delete_expense function throwing error.
+- **Cause** - Indentation was incorrect.
+
 ## Credits
 ### General Credits
 - ChatGPT used to show the report back to the user as this syntax was foreign to me

@@ -397,4 +397,33 @@ def list_expenses():
         return None
 
 
+def delete_expense():
+    """
+    Function to delete a specific expense by its index
+    """
+    df = list_expenses()
+    if df is None:
+        return
+
+    try:
+        index = int(input("\n  Enter the index of the expense to"
+                    + " delete: ").strip())
+        if index in df.index:
+            row_to_delete = df.iloc[index]
+            cell = Expenses.find(str(row_to_delete['date']))
+            Expenses.delete_rows(cell.row)
+            print(
+                Fore.GREEN
+                + f'  Expense on {row_to_delete["date"]} deleted successfully'
+                + Style.RESET_ALL
+            )
+        else:
+            print('  Invalid index. Please try again.')
+    except ValueError:
+        print('  Invalid input. Please enter a valid index.')
+    except Exception as e:
+        print(f'  An error occurred: {e}')
+    return expense_menu()
+
+
 greet_msg()
