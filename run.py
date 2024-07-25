@@ -48,15 +48,18 @@ def logo():
     """
     print(
         Fore.GREEN +
-        '  =============================================================================\n' +
+        '  ==============================================================\
+            ===============\n' +
         Style.RESET_ALL +
         ' \n' +
         Fore.BLUE +
-        '                    Welcome to your personal expenses tracker!                    \n' +
+        '                    Welcome to your personal expenses tracker!  \
+                              \n' +
         Style.RESET_ALL +
         ' \n' +
         Fore.GREEN +
-        '  =============================================================================\n' +
+        '  ==============================================================\
+            ===============\n' +
         Style.RESET_ALL)
 
 
@@ -101,7 +104,8 @@ def register_user():
         elif not name.isalpha():
             print(
                 Fore.RED +
-                '  Please make sure you use alpabetical characters (a-z) only.' +
+                '  Please make sure you use alpabetical characters \
+                    (a-z) only.' +
                 Style.RESET_ALL)
         else:
             clear()
@@ -110,7 +114,8 @@ def register_user():
 
     while True:
         user_id = input(
-            '\n  Create a unique 4-digit ID (this cannot be retrieved if forgotten): \n'
+            '\n  Create a unique 4-digit ID (this cannot be retrieved if \
+                forgotten): \n'
             '  ')
         # Check if the user input was a 4 digit code and numeric
         if len(user_id) == 4 and user_id.isdigit():
@@ -223,7 +228,8 @@ def expense_menu():
         else:
             print(
                 Fore.RED +
-                '  Invalid input. Please enter "1" to add an expense or "2" to get a report' +
+                '  Invalid input. Please enter "1" to add an expense or "2" to\
+                     get a report' +
                 Style.RESET_ALL)
 
 
@@ -279,7 +285,8 @@ def add_expense():
             Style.RESET_ALL)
         return add_expense()
     date = input(
-        '  Enter the date of expenses (DD-MM-YYYY) or leave blank for today: \n'
+        '  Enter the date of expenses (DD-MM-YYYY) or leave blank for \
+            today: \n'
         '  ')
     if not date:
         date = datetime.today().strftime('%d-%m-%Y')
