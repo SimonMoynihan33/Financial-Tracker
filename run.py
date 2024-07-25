@@ -234,7 +234,7 @@ def expense_menu():
             print(
                 Fore.RED
                 + '  Invalid input. Please enter "1" to add an expense or "2"'
-                + 'to get a report'
+                + ' to get a report'
                 + Style.RESET_ALL
             )
 
@@ -299,20 +299,19 @@ def add_expense():
             "today: \n"
             "  "
             )
-    if not date:
-        date = datetime.today().strftime("%d-%m-%Y")
-        break
-    else:
-        # Validate date format
-        try:
-            datetime.strptime(date, "%d-%m-%Y")
-        except ValueError:
-            print(
-                Fore.RED
-                + "  Incorrect date format, should be DD-MM-YYYY"
-                + Style.RESET_ALL
+        if not date:
+            date = datetime.today().strftime("%d-%m-%Y")
+            break
+        else:
+            # Validate date format
+            try:
+                datetime.strptime(date, "%d-%m-%Y")
+            except ValueError:
+                print(
+                    Fore.RED
+                    + "  Incorrect date format, should be DD-MM-YYYY"
+                    + Style.RESET_ALL
             )
-            return
     try:
         Expenses.append_row([current_user_id, amount, category_map[category],
                             date])
