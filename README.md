@@ -117,7 +117,8 @@ Happy coding!
 
 ### Bug 09 
 - **Issue** - Cannot get delete_expense function to show
-- **Cause**
+- **Cause** - This was due to calling the list_expense function within delete function. This meant that the code would execute this function before finishing the delete expense function.
+
 
 ## Credits
 ### General Credits

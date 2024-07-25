@@ -218,8 +218,7 @@ def expense_menu():
             '  Would you like to\n'
             '  (1) add an expense\n'
             '  (2) get a report on recent expenses\n'
-            '  (3) list expenses\n'
-            '  (4) delete an expense\n'
+            '  (3) list and delete expenses\n'
             '  '
         ).strip()
         if response == '1':
@@ -230,9 +229,6 @@ def expense_menu():
             break
         elif response == '3':
             list_expenses()
-            break
-        elif response == '4':
-            delete_expense()
             break
         elif response == '0':
             clear()
@@ -388,7 +384,7 @@ def list_expenses():
                 str(current_user_id)]
 
         if not rows:
-            print("  No expenses found for this user.")
+            print("  No expenses found")
             return expense_menu()
 
         df = pd.DataFrame(rows, columns=['user_id', 'amount', 'category',
@@ -402,8 +398,21 @@ def list_expenses():
 
         print("\n  Your Expenses:")
         print(df.to_string(index=True))
-
-        return expense_menu()
+        while True:
+            go_back = input('\n  Type "1" to return to previous page or "2" to delete an expense\n')
+            if go_back == '1':
+                print('Returning...')
+                sleep(.5)
+                expense_menu()
+                break
+            elif go_back == "2":
+                print('Redirecting...')
+                sleep(.5)
+                delete_expense()
+                break
+            else:
+                print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
+        return df
     except Exception as e:
         print(f'  An error occurred: {e}')
         return None
@@ -428,13 +437,15 @@ def delete_expense():
             if index in df.index:
                 row_to_delete = df.loc[index]
                 cell = Expenses.find(str(row_to_delete['date']))
-                Expenses.delete_rows(cell.row)
-                print(
-                    Fore.GREEN
-                    + f'  Expense on {row_to_delete["date"]} deleted successfully'
-                    + Style.RESET_ALL
-                )
-                break
+                if cell:
+                    Expenses.delete_rows(cell.row)
+                    print(
+                        Fore.GREEN
+                        + f'  Expense on {row_to_delete["date"]} deleted successfully'
+                        + Style.RESET_ALL
+                    )
+                    break
+                    return expense_menu()
             else:
                 print(Fore.RED + '  Invalid index. Please try again.' + Style.RESET_ALL)
         except ValueError:
@@ -442,7 +453,6 @@ def delete_expense():
             + Style.RESET_ALL)
         except Exception as e:
             print(Fore.RED + f'  An error occurred: {e}' + Style.RESET_ALL)
-    return expense_menu()
 
 
 greet_msg()
