@@ -50,8 +50,8 @@ def logo():
     """
     print(
         Fore.GREEN
-        + "  ==============================================================\
-            ===============\n"
+        + "  =============================================================="+
+            "===============\n"
         + Style.RESET_ALL
         + " \n"
         + Fore.BLUE
@@ -60,8 +60,8 @@ def logo():
         + Style.RESET_ALL
         + " \n"
         + Fore.GREEN
-        + "  ==============================================================\
-            ===============\n"
+        + "  =============================================================="+
+            "===============\n"
         + Style.RESET_ALL
     )
 
@@ -72,8 +72,8 @@ def greet_msg():
     """
     logo()
     while True:
-        response = input("  Are you already registered? (y/n): \n" " \
-             ").strip().lower()
+        response = input("  Are you already registered? (y/n): \n"
+        "  ").strip().lower()
         if response == "y":
             print("\n  Proceeding to login...")
             sleep(1)
@@ -107,8 +107,8 @@ def register_user():
         elif not name.isalpha():
             print(
                 Fore.RED
-                + "  Please make sure you use alpabetical characters \
-                    (a-z) only."
+                + "  Please make sure you use alpabetical characters "+
+                    "(a-z) only."
                 + Style.RESET_ALL
             )
         else:
@@ -118,8 +118,8 @@ def register_user():
 
     while True:
         user_id = input(
-            "\n  Create a unique 4-digit ID (this cannot be retrieved if \
-                forgotten): \n"
+            "\n  Create a unique 4-digit ID (this cannot be retrieved if "
+                "forgotten): \n"
             "  "
         )
         # Check if the user input was a 4 digit code and numeric
@@ -165,8 +165,8 @@ def user_login():
     print('\n  Type "BACK" to return to previous page\n')
     while True:
         user_input_id = input(
-            "  Please enter your unique 4 digit code: \n" "  "
-        ).strip()
+            "  Please enter your unique 4 digit code: \n"
+            "  ").strip()
         if user_input_id.upper() == "BACK":
             clear()
             greet_msg()
@@ -233,8 +233,8 @@ def expense_menu():
         else:
             print(
                 Fore.RED
-                + '  Invalid input. Please enter "1" to add an expense or "2"\
-                to get a report'
+                + '  Invalid input. Please enter "1" to add an expense or "2"'+
+                'to get a report'
                 + Style.RESET_ALL
             )
 
@@ -289,8 +289,8 @@ def add_expense():
               Style.RESET_ALL)
         return add_expense()
     date = input(
-        "  Enter the date of expenses (DD-MM-YYYY) or leave blank for \
-            today: \n"
+        "  Enter the date of expenses (DD-MM-YYYY) or leave blank for "
+            "today: \n"
         "  "
     )
     if not date:
@@ -312,8 +312,8 @@ def add_expense():
         sleep(1.5)
         print(
             Fore.GREEN
-            + f"  Expense of {amount} in category \
-                {category_map[category]} added for {date}."
+            + f"  Expense of {amount} in category "+
+                f"{category_map[category]} added for {date}."
             + Style.RESET_ALL
         )
         expense_menu()
@@ -359,6 +359,35 @@ def get_report():
         return expense_menu()
     except Exception as e:
         print(f"  An error occurred: {e}")
+
+
+def list_expenses():
+    """
+    Function to list all expenses for the current user
+    Written by ChatGPT
+    """
+    global current_user_id
+    try:
+        records = Expenses.get_all_records()
+        rows = [row for row in records if str(row['user_id']) == str(current_user_id)]
+
+        if not rows:
+            print("  No expenses found for this user.")
+            return expense_menu()
+
+        df = pd.DataFrame(rows, columns=['user_id', 'amount', 'category', 'date'])
+        df['amount'] = df['amount'].astype(float)
+        df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y').dt.strftime('%d-%m-%Y')
+
+        print("\n  Your Expenses:")
+        print(df.to_string(index=True))
+
+        return df
+    except Exception as e:
+        print(f'  An error occurred: {e}')
+        return None
+
+
 
 
 greet_msg()
