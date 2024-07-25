@@ -214,18 +214,26 @@ def expense_menu():
     while True:
         print('\n  Press "0" if you wish to log out\n' "  ")
         response = input(
-            "  Would you like to\n"
-            "  (1) add an expense\n"
-            "  (2) get a report on recent expenses\n"
-            "  "
+            '  Would you like to\n'
+            '  (1) add an expense\n'
+            '  (2) get a report on recent expenses\n'
+            '  (3) list expenses\n'
+            '  (4) delete an expense\n'
+            '  '
         )
-        if response == "1":
+        if response == '1':
             add_expense()
             break
-        elif response == "2":
+        elif response == '2':
             get_report()
             break
-        elif response == "0":
+        elif response == '3':
+            list_expenses()
+            break
+        elif response == '4':
+            delete_expense()
+            break
+        elif response == '0':
             clear()
             sleep(1.5)
             user_login()
@@ -233,7 +241,8 @@ def expense_menu():
         else:
             print(
                 Fore.RED
-                + '  Invalid input. Please enter "1" to add an expense or "2"'
+                + '  Invalid input. Please enter "1", "2", "3", '
+                ' "4" or "0" to log out.'
                 + ' to get a report'
                 + Style.RESET_ALL
             )
@@ -395,6 +404,7 @@ def list_expenses():
     except Exception as e:
         print(f'  An error occurred: {e}')
         return None
+    return expense_menu()
 
 
 def delete_expense():
