@@ -292,14 +292,16 @@ def add_expense():
                 '  Invalid category. Please try again'
                 + Style.RESET_ALL
             )
-            
-    date = input(
-        "  Enter the date of expenses (DD-MM-YYYY) or leave blank for "
-        "today: \n"
-        "  "
-    )
+    while True:  
+        date = input(
+            "  Enter the date of expenses (DD-MM-YYYY) or" +
+            "leave blank for "
+            "today: \n"
+            "  "
+            )
     if not date:
         date = datetime.today().strftime("%d-%m-%Y")
+        break
     else:
         # Validate date format
         try:
