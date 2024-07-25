@@ -252,31 +252,6 @@ def add_expense():
             break
         except ValueError:
             print(Fore.RED + "  Input must be a number" + Style.RESET_ALL)
-
-    category = input(
-        "  Enter the category of the expense: \n"
-        "          (1) "
-        + Fore.LIGHTYELLOW_EX
-        + "Bills"
-        + Style.RESET_ALL
-        + "          (3) "
-        + Fore.LIGHTBLUE_EX
-        + "Fun\n"
-        + Style.RESET_ALL
-        + "          (2) "
-        + Fore.LIGHTCYAN_EX
-        + "Subscriptions"
-        + Style.RESET_ALL
-        + "  (4) "
-        + Fore.LIGHTMAGENTA_EX
-        + "Food\n"
-        + Style.RESET_ALL
-        + "          (5) "
-        + Fore.LIGHTRED_EX
-        + "Other\n"
-        + Style.RESET_ALL
-        + "  "
-    )
     category_map = {
         "1": "Bills",
         "2": "Subscriptions",
@@ -284,10 +259,40 @@ def add_expense():
         "4": "Food",
         "5": "Other",
     }
-    if category not in category_map:
-        print(Fore.RED + "  Invalid category. Please try again." +
-              Style.RESET_ALL)
-        return add_expense()
+    while True:
+        category = input(
+            "  Enter the category of the expense: \n"
+            "          (1) "
+            + Fore.LIGHTYELLOW_EX
+            + "Bills"
+            + Style.RESET_ALL
+            + "          (3) "
+            + Fore.LIGHTBLUE_EX
+            + "Fun\n"
+            + Style.RESET_ALL
+            + "          (2) "
+            + Fore.LIGHTCYAN_EX
+            + "Subscriptions"
+            + Style.RESET_ALL
+            + "  (4) "
+            + Fore.LIGHTMAGENTA_EX
+            + "Food\n"
+            + Style.RESET_ALL
+            + "          (5) "
+            + Fore.LIGHTRED_EX
+            + "Other\n"
+            + Style.RESET_ALL
+            + "  "
+        )
+        if category in category_map:
+            break
+        else:
+            print(
+                Fore.RED + 
+                '  Invalid category. Please try again'
+                + Style.RESET_ALL
+            )
+            
     date = input(
         "  Enter the date of expenses (DD-MM-YYYY) or leave blank for "
         "today: \n"
@@ -305,7 +310,7 @@ def add_expense():
                 + "  Incorrect date format, should be DD-MM-YYYY"
                 + Style.RESET_ALL
             )
-            return add_expense()
+            return
     try:
         Expenses.append_row([current_user_id, amount, category_map[category],
                             date])
@@ -379,8 +384,8 @@ def list_expenses():
         df = pd.DataFrame(rows, columns=['user_id', 'amount', 'category',
                                          'date'])
         df['amount'] = df['amount'].astype(float)
-        df['date'] = pd.to_datetime(df['date'], format='%d-%m-%Y')
-        .dt.strftime('%d-%m-%Y')
+        df['date'] = pd.to_datetime(df['date'],
+                                    format='%d-%m-%Y').dt.strftime('%d-%m-%Y')
 
         print("\n  Your Expenses:")
         print(df.to_string(index=True))
