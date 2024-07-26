@@ -233,7 +233,7 @@ def expense_menu():
         elif response == '3':
             clear()
             sleep(1.5)
-            list_expenses
+            list_expenses()
             break
         elif response == '0':
             clear()
