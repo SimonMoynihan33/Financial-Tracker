@@ -45,10 +45,23 @@ def clear():
         _ = system("clear")
 
 
+def center_text(text, width):
+    lines = text.splitlines()
+    centered_lines = [line.center(width) for line in lines]
+    return "\n".join(centered_lines)
+
+
 def logo():
     """
     Function to print logo for app
     """
+    ascii_art = r"""
+__        _______ _     ____ ___  __  __ _____ _ 
+\ \      / / ____| |   / ___/ _ \|  \/  | ____| |
+ \ \ /\ / /|  _| | |  | |  | | | | |\/| |  _| | |
+  \ V  V / | |___| |__| |__| |_| | |  | | |___|_|
+   \_/\_/  |_____|_____\____\___/|_|  |_|_____(_)"""
+    centered_ascii_art = center_text(ascii_art, 80)
     print(
         Fore.GREEN
         + "  ==============================================================" +
@@ -56,8 +69,8 @@ def logo():
         + Style.RESET_ALL
         + " \n"
         + Fore.BLUE
-        + "                    Welcome to your personal expenses tracker!  "
-        + "                      \n"
+        + centered_ascii_art
+        + "\n"
         + Style.RESET_ALL
         + " \n"
         + Fore.GREEN
