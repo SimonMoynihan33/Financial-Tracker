@@ -34,7 +34,7 @@ The following section outlines the manual testing process for the expense tracke
 - The welcome message and logo should be centered and displayed with the appropriate colors.
 
 **Image Here:**
-- 
+![Welcome message](docs/readme-images/home-screen.webp)
 
 #### Register
 **Test Steps:**
@@ -46,12 +46,12 @@ The following section outlines the manual testing process for the expense tracke
 - User should be able to register with a valid name and unique 4-digit ID.
 - Registration success message should be displayed.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 #### Login
 **Test Steps:**
-1. After registration, proceed to log in by entering 'y' at the welcome prompt.
+1. After registration, proceed to log in.
 2. Enter the unique 4-digit ID to log in.
 3. Verify the login success message is displayed.
 
@@ -59,8 +59,8 @@ The following section outlines the manual testing process for the expense tracke
 - User should be able to log in with the correct ID.
 - Login success message should be displayed.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 #### 2. Expense Menu
 
@@ -73,8 +73,8 @@ The following section outlines the manual testing process for the expense tracke
 - The expense should be logged with the correct details.
 - Success message should be displayed.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 **Test Errors:**
 1. Enter an invalid amount (e.g., a string instead of a number).
@@ -85,8 +85,8 @@ The following section outlines the manual testing process for the expense tracke
 - Appropriate error messages should be displayed for invalid inputs.
 - User should be prompted to re-enter the information.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 #### 3. Viewing Expenses by Month and Category
 
@@ -98,8 +98,8 @@ The following section outlines the manual testing process for the expense tracke
 - The report should display expenses grouped by month and category.
 - The aggregate expenditure for each category within the month should be shown.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 #### 4. Viewing All Expenses
 
@@ -110,8 +110,8 @@ The following section outlines the manual testing process for the expense tracke
 **Expected Result:**
 - All expenses should be listed in a table with the correct details.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 #### 5. Deleting an Expense
 
@@ -124,8 +124,8 @@ The following section outlines the manual testing process for the expense tracke
 - The specified expense should be deleted.
 - Success message should be displayed.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 **Test Errors:**
 1. Enter an invalid index for deletion.
@@ -135,8 +135,8 @@ The following section outlines the manual testing process for the expense tracke
 - Appropriate error messages should be displayed for invalid inputs.
 - User should be prompted to re-enter the information.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 #### 6. Navigating the Application
 
@@ -148,8 +148,8 @@ The following section outlines the manual testing process for the expense tracke
 - An error message should be displayed for invalid inputs.
 - User should be redirected back to the prompt to make a valid selection.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 **Test Steps:**
 1. At any prompt, enter '0' to log out.
@@ -158,8 +158,8 @@ The following section outlines the manual testing process for the expense tracke
 **Expected Result:**
 - User should be logged out and returned to the main menu.
 
-**Image Here:**
-- 
+**Achieved?** 
+- Yes
 
 ## Bugs 
 ### Fixed Bugs
@@ -209,3 +209,5 @@ The following section outlines the manual testing process for the expense tracke
 - **Fix** - Create a new function to call the original list_expense function (name now changed to display_expenses()). Use delete function and new list function to call this seperately.
 
 ## Unfixed Bugs
+
+Currently there are no unfixed bugs found.

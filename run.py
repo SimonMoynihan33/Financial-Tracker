@@ -318,7 +318,7 @@ def add_expense():
             )
     while True:
         date = input(
-            "  Enter the date of expenses (DD-MM-YYYY) or" +
+            "  Enter the date of expenses (DD-MM-YYYY) or " +
             "leave blank for "
             "today: \n"
             "  "
@@ -505,7 +505,7 @@ def list_expenses():
         return
 
     while True:
-        go_back = input('\n  Type "1" to return to previous page or "2" to'
+        go_back = input('\n  Type "1" to return to main menu or "2" to'
                         + ' delete an expense\n  ').strip()
         if go_back == '1':
             print('  Returning...')
