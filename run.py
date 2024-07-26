@@ -293,11 +293,11 @@ def add_expense():
             break
         else:
             print(
-                Fore.RED + 
+                Fore.RED +
                 '  Invalid category. Please try again'
                 + Style.RESET_ALL
             )
-    while True:  
+    while True:
         date = input(
             "  Enter the date of expenses (DD-MM-YYYY) or" +
             "leave blank for "
@@ -316,7 +316,7 @@ def add_expense():
                     Fore.RED
                     + "  Incorrect date format, should be DD-MM-YYYY"
                     + Style.RESET_ALL
-            )
+                )
     try:
         Expenses.append_row([current_user_id, amount, category_map[category],
                             date])
@@ -398,7 +398,7 @@ def display_expenses():
 
         print("\n  Your Expenses:")
         print(df.to_string(index=True))
-        
+
         return df
     except Exception as e:
         print(f'  An error occurred: {e}')
@@ -420,7 +420,9 @@ def delete_expense():
     while True:
         try:
             index = int(
-                input("\n  Enter the index of the expense to delete: ").strip())
+                input(
+                    "\n  Enter the index of the expense to delete: "
+                ).strip())
             if index in df.index:
                 row_to_delete = df.loc[index]
                 cell = Expenses.find(str(row_to_delete['date']))
@@ -428,23 +430,25 @@ def delete_expense():
                     Expenses.delete_rows(cell.row)
                     print(
                         Fore.GREEN
-                        + f'  Expense on {row_to_delete["date"]} deleted successfully'
+                        + f'  Expense on {row_to_delete["date"]} deleted '
+                        + 'successfully'
                         + Style.RESET_ALL
                     )
-                    break
-                    expense_menu()
+                    return expense_menu()
             else:
-                print(Fore.RED + '  Invalid index. Please try again.' + Style.RESET_ALL)
+                print(Fore.RED + '  Invalid index. Please try again.'
+                      + Style.RESET_ALL)
         except ValueError:
             print(Fore.RED + '  Invalid input. Please enter a valid index.'
-            + Style.RESET_ALL)
+                  + Style.RESET_ALL)
         except Exception as e:
             print(Fore.RED + f'  An error occurred: {e}' + Style.RESET_ALL)
 
 
 def list_expenses():
     """
-    Function to list all expenses for the current user and return to expense menu
+    Function to list all expenses for the current user and return to expense
+    menu
     """
     df = display_expenses()
     if df is None or df.empty:
@@ -454,7 +458,8 @@ def list_expenses():
         return
 
     while True:
-        go_back = input('\n  Type "1" to return to previous page or "2" to delete an expense\n')
+        go_back = input('\n  Type "1" to return to previous page or "2" to'
+                        + 'delete an expense\n').strip()
         if go_back == '1':
             print('Returning...')
             sleep(0.5)
@@ -466,7 +471,9 @@ def list_expenses():
             delete_expense()
             break
         else:
-            print(Fore.RED + 'Invalid input. Please enter "1" or "2".' + Style.RESET_ALL)
+            print(Fore.RED + 'Invalid input. Please enter "1" or "2".'
+                  + Style.RESET_ALL)
 
 
 greet_msg()
+
