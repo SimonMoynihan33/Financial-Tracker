@@ -2,12 +2,12 @@ from datetime import datetime
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
-
-# Import colorama CREDS
+# Import colorama (Link)
 # (https://sparkbyexamples.com/python/print-colored-text-to-the-terminal-in-python/#:~:text=ANSI%20Escape%20Sequences%20to%20Add%20Color%20to%20Terminal%20Output&text=The%20escape%20sequence%20for%20setting,followed%20by%20the%20letter%20m%20.)
 from colorama import init, Fore, Style
 from os import system, name
 from time import sleep
+# Import Rich (Link) (https://pypi.org/project/rich/)
 from rich.console import Console
 from rich.table import Table
 
