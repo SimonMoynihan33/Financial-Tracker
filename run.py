@@ -338,6 +338,7 @@ def get_report():
     Function written by ChatGPT
     """
     global current_user_id
+    console = Console()
     print("\n  Fetching data...\n")
     sleep(1.5)
     try:
@@ -364,9 +365,17 @@ def get_report():
         # Sort the grouped data
         grouped = grouped.sort_values(by=["month_year", "category"])
 
-        print("\n  Recent Expenses (Grouped by Month and Category):")
-        print(grouped.to_string(index=False))
+        table = Table(title="Recent Expenses (Grouped by Month and Category)")
+        table.add_column("Month-Year", justify="right", style="cyan",
+                         no_wrap=True)
+        table.add_column("Category", style="magenta")
+        table.add_column("Amount", justify="right", style="green")
 
+        for _, row in grouped.iterrows():
+            table.add_row(str(row["month_year"]), row["category"],
+                          f'{row["amount"]:.2f}')
+
+        console.print(table)
         return expense_menu()
     except Exception as e:
         print(f"  An error occurred: {e}")
