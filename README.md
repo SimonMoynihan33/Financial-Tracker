@@ -6,7 +6,7 @@ Welcome to the Expense Tracker Application, a robust and user-friendly tool desi
 
 An application that can track expenses, log them and calculate by category and time could be incredibly useful to the right user. Many people struggle with logging expenses, sometimes spending much more than they were thinking. An application such as this could help eliminate this issue and allow people to take back control of their spending. 
 <p align='center'>
-<img src='docs/readme-images/home-screen.webp' alt='Home Screen'>
+<img src='docs/readme-images/terminal-home.png' alt='Home Screen'>
 </p>
 
 **Note** This app is for educational and recreational purposes only. Please do not enter any critical information pertaining to bank details. 
@@ -63,53 +63,27 @@ A user who uses this app has a clear goal in mind. Get control of expenditure. A
 
 ## Testing
 
-## Bugs 
-### Bug 01
-- **Issue** - `UnboundLocalError: cannot access local variable 'user_id' where it is not associated with a value` thrown when trying to log in with saved id.
-- **Cause** - `register_user()` and `user_login()` were given different data types (string and integer).
-- **Fix** - Change both user_id inputs to integers.
-
-### Bug 02 
-- **Issue** - `TypeError: object of type 'int' has no len()` when trying to input a name and id after changes made.
-- **Cause** - This was due to me using `len()` for integers which python does not allow.
-- **Fix** - Check the length of the id input before converting to an int().
-
-### Bug 03 
-- **Issue** - `NameError: name 'user_id' is not defined` relating to the `check_user_id(user_id)` function. 
-- **Cause** - This was due to user_id not being declared in the current scope.
-- **Fix** - `c.excute` line had 'id' instead of 'user_id'. Correctly define it also in user_login.
-
-### Bug 04 
-- **Issue** - When an invalid input is used in the registration screen, it continues on to the log in code instead of going back to the create a code. 
-- **Fix** - Create two while loops to check validate that the name inputted is alphabetical characters only and that it loops back around if not. Same was done for digit input to loop until correct.
-
-### Bug 05
-- **Issue** - When a date is put in for an expense, it brings you back to the 'Create a unique 4-digit ID' prompt. This only happens for a new user who directly goes to add an expense.
-- **Cause** - I did not find the cause for this issue but I was able to find a work around.
-- **Fix** - After registration, bring the user back to login prompt to log in, this now allows them to add expenses. 
-
-### Bug 06
-- **Issue** - Heroku does not support SQLite3 database.
-- **Fix** - Change database to Google Sheets.
-
-### Bug 07 
-- **Issue** - Cannot validate the expense amount. `AttributeError: 'float' object has no attribute 'isdigit'` error being thrown in the console after an amount is entered.
-- **Cause** - After a Google search I found `.isdigit()` cannot be used with `float()` due to it having decimal points.
-- **Fix** - Add while loop and try statemet to convert the amount to a float after it is entered, given that it is a number and can be converted.
-
-### Bug 08
-- **Issue** - ```print(
-            Fore.GREEN
-            + f'  Expense on {row_to_delete["date"]} deleted successfully'
-            + Style.RESET_ALL)``` In delete_expense function throwing error.
-- **Cause** - Indentation was incorrect.
-
-### Bug 09 
-- **Issue** - Cannot get delete_expense function to show
-- **Cause** - This was due to calling the list_expense function within delete function. This meant that the code would execute this function before finishing the delete expense function.
-- **Fix** - Create a new function to call the original list_expense function (name now changed to display_expenses()). Use delete function and new list function to call this seperately.
 
 ## Deployment
+
+This site is deployed using Heroku and following these steps:
+
+- Create a Heroku account or, if you already have one, sign in
+- Click the 'new' button and select 'create new app'
+- Enter a unique name for your app and choose the region you are in
+- Click 'create app'
+- Click 'settings' and scroll down to 'Config Vars'. Click 'reveal Config Vars'
+- In the box with the text 'KEY' type PORT and 8000 in the box with the text 'VALUE'
+- Scroll to the next section, buildpacks and click 'add buildpack'. Add Python and NodeJS, in that order. Click 'Add Buildpack'
+- Scroll back to the top of the page and click 'Deploy'
+- Scroll to the Deployment method and choose Github
+- In the next section, Connect to Github, type in your repository name. If you press the search button it'll bring up all your repositories. 
+- Connect to the correct repository
+- Scroll down to the two sections for deployment (automatic deploys or manual deploys). The automatic deplays will update each time the 'git push' command is entered. For the maunal deploy, this will deploy the branch specified, in it's current state, when the 'Deploy Branch' button is clicked
+- Back to top
+
+### Forking the project
+
 
 ## Credits
 ### General Credits

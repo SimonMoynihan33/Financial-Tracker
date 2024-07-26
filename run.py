@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
@@ -326,17 +326,25 @@ def add_expense():
         if not date:
             date = datetime.today().strftime("%d-%m-%Y")
             break
-        else:
-            # Validate date format
-            try:
-                datetime.strptime(date, "%d-%m-%Y")
-                break
-            except ValueError:
+        try:
+            entered_date = datetime.strptime(date, "%d-%m-%Y")
+            today = datetime.today()
+            one_year_future = today + timedelta(days=365)
+            if entered_date.year > 2010 and entered_date <= one_year_future:
+                break  # Exit loop if date is valid and within one year from today
+            else:
+                print(
+                    Fore.RED +
+                    "  Date must be after the year 2010 and within one year from "
+                    + "today." + Style.RESET_ALL
+                    )
+        except ValueError:
                 print(
                     Fore.RED
                     + "  Incorrect date format, should be DD-MM-YYYY"
                     + Style.RESET_ALL
                 )
+
     try:
         Expenses.append_row([current_user_id, amount, category_map[category],
                             date])
