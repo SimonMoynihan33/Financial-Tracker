@@ -372,9 +372,9 @@ def get_report():
         print(f"  An error occurred: {e}")
 
 
-def list_expenses():
+def display_expenses():
     """
-    Function to list all expenses for the current user
+    Helper function to list all expenses for the current user
     Written by ChatGPT
     """
     global current_user_id
@@ -398,20 +398,7 @@ def list_expenses():
 
         print("\n  Your Expenses:")
         print(df.to_string(index=True))
-        while True:
-            go_back = input('\n  Type "1" to return to previous page or "2" to delete an expense\n')
-            if go_back == '1':
-                print('Returning...')
-                sleep(.5)
-                expense_menu()
-                break
-            elif go_back == "2":
-                print('Redirecting...')
-                sleep(.5)
-                delete_expense()
-                break
-            else:
-                print(Fore.RED + 'Invalid input' + Style.RESET_ALL)
+        
         return df
     except Exception as e:
         print(f'  An error occurred: {e}')
@@ -423,7 +410,7 @@ def delete_expense():
     Function to delete a specific expense by its index
     """
     global current_user_id
-    df = list_expenses()
+    df = display_expenses()
     if df is None or df.empty:
         print('  You have nothing to delete!')
         print('  Returning...')
@@ -445,7 +432,7 @@ def delete_expense():
                         + Style.RESET_ALL
                     )
                     break
-                    return expense_menu()
+                    expense_menu()
             else:
                 print(Fore.RED + '  Invalid index. Please try again.' + Style.RESET_ALL)
         except ValueError:
@@ -453,6 +440,33 @@ def delete_expense():
             + Style.RESET_ALL)
         except Exception as e:
             print(Fore.RED + f'  An error occurred: {e}' + Style.RESET_ALL)
+
+
+def list_expenses():
+    """
+    Function to list all expenses for the current user and return to expense menu
+    """
+    df = display_expenses()
+    if df is None or df.empty:
+        print('  No expenses found or an error occurred!')
+        sleep(1)
+        expense_menu()
+        return
+
+    while True:
+        go_back = input('\n  Type "1" to return to previous page or "2" to delete an expense\n')
+        if go_back == '1':
+            print('Returning...')
+            sleep(0.5)
+            expense_menu()
+            break
+        elif go_back == '2':
+            print('Redirecting...')
+            sleep(0.5)
+            delete_expense()
+            break
+        else:
+            print(Fore.RED + 'Invalid input. Please enter "1" or "2".' + Style.RESET_ALL)
 
 
 greet_msg()
