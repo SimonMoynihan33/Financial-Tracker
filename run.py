@@ -474,6 +474,6 @@ def list_expenses():
             print(Fore.RED + 'Invalid input. Please enter "1" or "2".'
                   + Style.RESET_ALL)
 
-
+clear()
 greet_msg()
 
