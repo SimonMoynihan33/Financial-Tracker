@@ -46,6 +46,9 @@ def clear():
 
 
 def center_text(text, width):
+    """
+    Centers text for welcome message
+    """
     lines = text.splitlines()
     centered_lines = [line.center(width) for line in lines]
     return "\n".join(centered_lines)

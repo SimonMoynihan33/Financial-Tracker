@@ -55,11 +55,101 @@ A user who uses this app has a clear goal in mind. Get control of expenditure. A
 ## Features
 ### Login Feature
 
-### Validation Errors
+A log-in feature that allows a user to keep track of their expenses. Each person has a unique ID.
+
+![Login](docs/readme-images/login.png)
+
+### Register
+
+A feature that allows users to register.
+
+![Register](docs/readme-images/register.png)
+
+### Expense Menu
+
+Menu where users can navigate between adding, deleting, listing and showing a report of expenses.
+
+![Expense MEnu](docs/readme-images/expense-menu.png)
+
+### Add Expense
+
+Feature that let's users add an expense by date, category and amount.
+
+![Add Expense](docs/readme-images/add-expense.png)
+
+The date can only be added for dates on or after 2010, and only up to a year in the future, allowing users to plan future expenses.
+
+### Show Report
+
+Get a report of expenses sorted by month ands category. This feature sums up all expenses of the same category in the same month to show how much has been spent.
+
+![Show Report](docs/readme-images/show-report.png)
+
+If there is no data the app also tells you this.
+
+![No data](docs/readme-images/no-data.png)
+
+### List expenses
+
+List expenses individually.
+
+![List Expenses](docs/readme-images/view-list.png)
+
+### Delete Expenses
+
+Delete expenses by index.
+
+![Delete Expenses](docs/readme-images/delete-expense.png)
+
+If there is none to delete you or shown a prompt.
+
+![Nothing to delete](docs/readme-images/nothing-to-delete.png)
+
+### Logout
+
+Users can press "0" to log out when in the main menu
+
+(This cannot be shown with an image, and videos cannot be shown here.)
+### Validation
+#### Login Validation
+
+![Login Validation](docs/readme-images/login-error.png)
+
+#### Name Validation
+
+![Name Validation](docs/readme-images/name-validation.png)
+
+#### ID Validation
+
+![ID Validation](docs/readme-images/id-validation.png)
+
+#### ID in Use
+
+![ID in use](docs/readme-images/id-in-use.png)
+
+#### No active ID
+
+![No active ID](docs/readme-images/no-active-id.png)
+
+#### Add expense 
+
+![Amount, Category, Date validation](docs/readme-images/amount-cat-date-val.png)
+
+#### List and Delete Expenses
+
+![List and Delete](docs/readme-images/list-delete-val.png)
 
 ## Design
 
+The design of this app displays a blue ascii art 'Welcome' message, green validation messages for correct inputs and red for incorrect. The Screen also clears in various parts of the app to avoid clutter and keep the path clear.
+
 ## Future Deployment
+
+In future deployment, some of the features I wish to add are:
+- A more secure log in
+- A more secure and complex database
+- More options within the menu such as logging balance, taking away from the balance, automated reductions and expenses and more
+- Classes and OOP in general to make the code more modern and modular-
 
 ## Testing
 
@@ -85,26 +175,44 @@ This site is deployed using Heroku and following these steps:
 - Scroll down to the two sections for deployment (automatic deploys or manual deploys). The automatic deplays will update each time the 'git push' command is entered. For the maunal deploy, this will deploy the branch specified, in it's current state, when the 'Deploy Branch' button is clicked
 - Back to top
 
-### Forking the project
-
-
 ## Credits
 ### General Credits
 - ChatGPT used to show the report back to the user as this syntax was foreign to me
 - [StackOverflow](https://stackoverflow.com/) used to answer questions I encountered with bugs and adding colors to the project
+- [Ascii Art](https://www.asciiart.eu/) for the welcome message.
 
 ### Libraries
-**[gspread](https://docs.gspread.org/en/v6.0.1/)** - Google Sheets Python API.
+**gspread** - Google Sheets Python API.
   - **Repository:** [gspread on GitHub](https://github.com/burnash/gspread)
   - **Documentation:** [gspread Documentation](https://gspread.readthedocs.io/en/latest/)
 
-**[pandas](https://pandas.pydata.org/)** - Data analysis and manipulation
+**pandas** - Data analysis and manipulation
   - **Repository:** [pandas on GitHub](https://github.com/pandas-dev/pandas)
   - **Documentation:** [pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/)
 
-**[colorama](https://pypi.org/project/colorama/)** - Colored text API
+**colorama** - Colored text API
   - **Repository:** [colorama on GitHub](https://github.com/tartley/colorama)
   - **Documentation:** [colorama Documentation](https://pypi.org/project/colorama/)
+
+**Rich** - `rich` library is used for displaying tables.
+  - **Documentation:** [Rich Documentation](https://rich.readthedocs.io/)
+  - **GitHub:** [Rich GitHub Repository](https://github.com/Textualize/rich)
+
+**Black** - `black` code formatter is used to ensure consistent code style and formatting throughout the project.
+  - **Documentation:** [Black Documentation](https://black.readthedocs.io/)
+  - **GitHub:** [Black GitHub Repository](https://github.com/psf/black)
+
+**PEP 8** - PEP 8 is the style guide for Python code used as a standard for writing readable and consistent code.
+  - **Documentation:** [PEP 8 Documentation](https://www.python.org/dev/peps/pep-0008/)
+  - The project follows PEP 8 guidelines to maintain code quality and readability.
+
+**ASCII Art** - The ASCII art used in this project adds a visually appealing header to the application and enhances the user interface. The ASCII art was created using online tools and resources that generate text art.
+  - Online Tool: [ASCII Art Generator](https://www.ascii-art.de/)
+  - The art provides a welcoming and engaging entry point for users, making the application feel more personalized and lively.
+
+**Lucidchart** - Lucidchart was used to create detailed diagrams and flowcharts to visually represent the structure and flow of the application. These diagrams aid in understanding the application's architecture, data flow, and user interactions.
+- Website: [Lucidchart](https://www.lucidchart.com/)
+- The visual aids created with Lucidchart provide clear and concise documentation of the project, making it easier for developers and stakeholders to grasp complex concepts and workflows.
 
 **os** - Part of the Python Standard Library for interacting with the operating system
   - **Documentation:** [os Documentation](https://docs.python.org/3/library/os.html)
