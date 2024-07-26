@@ -71,6 +71,7 @@ def greet_msg():
     """
     Message to greet user and ask if they have an account.
     """
+    clear()
     logo()
     while True:
         response = input("  Are you already registered? (y/n): \n"
@@ -118,6 +119,7 @@ def register_user():
             break
 
     while True:
+        print('  Type "BACK" to return to the main menu')
         user_id = input(
             "\n  Create a unique 4-digit ID (this cannot be retrieved if "
             "forgotten): \n"
@@ -216,19 +218,22 @@ def expense_menu():
         print('\n  Press "0" if you wish to log out\n  ')
         response = input(
             '  Would you like to\n'
-            '  (1) add an expense\n'
-            '  (2) get a report on recent expenses\n'
-            '  (3) list and delete expenses\n'
+            '  (1) Add an expense\n'
+            '  (2) Get a report on recent expenses\n'
+            '  (3) List and delete expenses\n'
             '  '
         ).strip()
         if response == '1':
             add_expense()
             break
         elif response == '2':
+            clear()
             get_report()
             break
         elif response == '3':
-            list_expenses()
+            clear()
+            sleep(1.5)
+            list_expenses
             break
         elif response == '0':
             clear()
@@ -387,6 +392,7 @@ def display_expenses():
     Written by ChatGPT
     """
     global current_user_id
+    console = Console()
     try:
         records = Expenses.get_all_records()
         rows = [row for row in records if str(row['user_id']) ==
@@ -405,9 +411,17 @@ def display_expenses():
         # Adjust index to start from 1 instead of 0
         df.index += 1
 
-        print("\n  Your Expenses:")
-        print(df.to_string(index=True))
+        table = Table(title="Your Expenses:")
+        
+        table.add_column("Index", justify="right", style="cyan", no_wrap=True)
+        table.add_column("Amount", justify="right", style="green")
+        table.add_column("Category", style="magenta")
+        table.add_column("Date", justify="right", style="cyan")
 
+        for index, row in df.iterrows():
+            table.add_row(str(index), f'{row["amount"]:.2f}', row["category"], row["date"])
+
+        console.print(table)
         return df
     except Exception as e:
         print(f'  An error occurred: {e}')
@@ -443,7 +457,7 @@ def delete_expense():
                         + 'successfully'
                         + Style.RESET_ALL
                     )
-                    return expense_menu()
+                    return list_expenses()
             else:
                 print(Fore.RED + '  Invalid index. Please try again.'
                       + Style.RESET_ALL)
@@ -468,7 +482,7 @@ def list_expenses():
 
     while True:
         go_back = input('\n  Type "1" to return to previous page or "2" to'
-                        + 'delete an expense\n').strip()
+                        + ' delete an expense\n').strip()
         if go_back == '1':
             print('Returning...')
             sleep(0.5)
