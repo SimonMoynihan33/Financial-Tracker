@@ -412,14 +412,15 @@ def display_expenses():
         df.index += 1
 
         table = Table(title="Your Expenses:")
-        
+
         table.add_column("Index", justify="right", style="cyan", no_wrap=True)
         table.add_column("Amount", justify="right", style="green")
         table.add_column("Category", style="magenta")
         table.add_column("Date", justify="right", style="cyan")
 
         for index, row in df.iterrows():
-            table.add_row(str(index), f'{row["amount"]:.2f}', row["category"], row["date"])
+            table.add_row(str(index), f'{row["amount"]:.2f}',
+                          row["category"], row["date"])
 
         console.print(table)
         return df
@@ -497,6 +498,6 @@ def list_expenses():
             print(Fore.RED + 'Invalid input. Please enter "1" or "2".'
                   + Style.RESET_ALL)
 
+
 clear()
 greet_msg()
-
