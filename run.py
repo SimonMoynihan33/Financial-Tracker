@@ -316,6 +316,7 @@ def add_expense():
             # Validate date format
             try:
                 datetime.strptime(date, "%d-%m-%Y")
+                break
             except ValueError:
                 print(
                     Fore.RED
