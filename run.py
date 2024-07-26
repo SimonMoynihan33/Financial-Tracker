@@ -59,7 +59,7 @@ def logo():
     Function to print logo for app
     """
     ascii_art = r"""
-__        _______ _     ____ ___  __  __ _____ _ 
+__        _______ _     ____ ___  __  __ _____ __
 \ \      / / ____| |   / ___/ _ \|  \/  | ____| |
  \ \ /\ / /|  _| | |  | |  | | | | |\/| |  _| | |
   \ V  V / | |___| |__| |__| |_| | |  | | |___|_|
@@ -334,18 +334,19 @@ def add_expense():
             today = datetime.today()
             one_year_future = today + timedelta(days=365)
             if entered_date.year > 2010 and entered_date <= one_year_future:
-                break  # Exit loop if date is valid and within one year from today
+                break  # Exit loop if date valid and within year from today
             else:
                 print(
                     Fore.RED +
-                    "  Date must be after the year 2010 and within one year from "
+                    "  Date must be after the year 2010 and within one year" +
+                    " from "
                     + "today." + Style.RESET_ALL
                     )
         except ValueError:
-                print(
-                    Fore.RED
-                    + "  Incorrect date format, should be DD-MM-YYYY"
-                    + Style.RESET_ALL
+            print(
+                Fore.RED
+                + "  Incorrect date format, should be DD-MM-YYYY"
+                + Style.RESET_ALL
                 )
 
     try:

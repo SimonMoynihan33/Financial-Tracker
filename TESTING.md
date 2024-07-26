@@ -161,6 +161,17 @@ The following section outlines the manual testing process for the expense tracke
 **Achieved?** 
 - Yes
 
+### Code Institute Linter
+No errors were found when passing through Code Institute Linter
+
+![CI Linter](docs/readme-images/ci-linter-pass.png)
+
+### PEP8
+Pep 8 code used to agressively reformat code to fit within best practices.
+
+### Black
+ `black` code formatter is used to ensure consistent code style and formatting throughout the project.
+
 ## Bugs 
 ### Fixed Bugs
 ### Bug 01
