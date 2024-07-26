@@ -1,23 +1,165 @@
 ## Contents
-- [Validation](#validation)
-- [User goals and stories](#user-goals)
+- [User goals and experience](#user-goals)
 - [Manual Testing](#manual-testing)
   - [Login](#login)
   - [Registration](#register)
   - [Expense Menu](#expense_menu)
-  - [Add Expense](#add-expense)
-  - [Show Report](#show-report)
-  - [List and Delete](#list-delete)
 - [Bugs](#bugs)
   - [Fixed Bugs](#fixed-bugs)
   - [Unfixed Bugs](unfixed-Bugs)
 
-**Goal**|**How is this Achieved?**
-:-----:|:-----:
-A simple program that users will want to use|The program is intuitive and guides the user through each step of using it. It is a simple program and the colours used, for the fonts, provide interest to the user
-An program that meets the user’s needs|The program allows the user to input transactions, to be able to analyse their spending and to view their transactions
-The user to feel their security is taken seriously|When an existing user enters their password the text is shown as asterisks so it is hidden from anyone that could be watching. The passwords are stored, in Google Sheets, as encrypted to prevent hacking. The error message, for the username and password not matching, doesn't say whether it's the username or password that has been entered wrong. This is another level of security to stop another user working out these details from which is wrong
+**Goal**|**Achieved?**|**How is this Achieved?**
+:-----:|:-----:|:-----:
+A friendly and accommodating interface|Yes|The program is intuitive and guides the user through each step of using it. It is a simple program and the colors used add character and life to the app
+A unique identifier so I can log in and out of the application at my own will|Yes|This is added through the program's unique 4-digit ID that you must create
+Be redirected back to the prompt, each time I enter a wrong input|Yes|Achieved through while loops
+Be clearly shown when an input is correct or incorrect using colors on validation|Yes|Achieved with green and red colors for correct and incorrect validation respectively
+Be able to log my expenses by amount, date and category|Yes|Achieved with the add_expense function
+Show my expenses by month and category, and the aggregate of my expenditure for each category within the month in a table|Yes|Achieved with the get_report function using the rich library for table display
+Be able to return back a step if I input the wrong decision|Yes|Achieved with proper error handling and while loops to guide the user back to the previous step
+Be able to delete an expense I have logged|Yes|Achieved with the delete_expense function, allowing the user to remove specific logged expenses
+Be able to see all expenses in a table|Yes|Achieved with the list_expenses function using the rich library for table display
 
+### Manual Testing
+
+The following section outlines the manual testing process for the expense tracker application. Each key functionality will be tested to ensure it performs as expected. Screenshots or images should be added to provide visual confirmation of each step.
+
+#### 1. Application Start and User Registration/Login
+
+**Test Steps:**
+1. Run the application.
+2. Verify the welcome message and logo are displayed correctly.
+
+**Expected Result:**
+- The welcome message and logo should be centered and displayed with the appropriate colors.
+
+**Image Here:**
+- 
+
+#### Register
+**Test Steps:**
+1. Enter 'n' to register a new user.
+2. Follow the prompts to enter your name and create a unique 4-digit ID.
+3. Verify the registration success message is displayed.
+
+**Expected Result:**
+- User should be able to register with a valid name and unique 4-digit ID.
+- Registration success message should be displayed.
+
+**Image Here:**
+- 
+
+#### Login
+**Test Steps:**
+1. After registration, proceed to log in by entering 'y' at the welcome prompt.
+2. Enter the unique 4-digit ID to log in.
+3. Verify the login success message is displayed.
+
+**Expected Result:**
+- User should be able to log in with the correct ID.
+- Login success message should be displayed.
+
+**Image Here:**
+- 
+
+#### 2. Expense Menu
+
+**Test Steps:**
+1. After logging in, choose the option to add an expense.
+2. Enter a valid amount, category, and date (within one year from today and after 2010).
+3. Verify the expense is logged successfully.
+
+**Expected Result:**
+- The expense should be logged with the correct details.
+- Success message should be displayed.
+
+**Image Here:**
+- 
+
+**Test Errors:**
+1. Enter an invalid amount (e.g., a string instead of a number).
+2. Enter an invalid date format or a date outside the allowed range.
+3. Enter a date in the future beyond one year from today.
+
+**Expected Result:**
+- Appropriate error messages should be displayed for invalid inputs.
+- User should be prompted to re-enter the information.
+
+**Image Here:**
+- 
+
+#### 3. Viewing Expenses by Month and Category
+
+**Test Steps:**
+1. After logging in, choose the option to get a report on recent expenses.
+2. Verify the report displays expenses by month and category, along with the aggregate of expenditure for each category within the month.
+
+**Expected Result:**
+- The report should display expenses grouped by month and category.
+- The aggregate expenditure for each category within the month should be shown.
+
+**Image Here:**
+- 
+
+#### 4. Viewing All Expenses
+
+**Test Steps:**
+1. After logging in, choose the option to list all expenses.
+2. Verify all expenses are displayed in a table format.
+
+**Expected Result:**
+- All expenses should be listed in a table with the correct details.
+
+**Image Here:**
+- 
+
+#### 5. Deleting an Expense
+
+**Test Steps:**
+1. After logging in, choose the option to delete an expense.
+2. Enter the index of the expense to delete.
+3. Verify the expense is deleted successfully.
+
+**Expected Result:**
+- The specified expense should be deleted.
+- Success message should be displayed.
+
+**Image Here:**
+- 
+
+**Test Errors:**
+1. Enter an invalid index for deletion.
+2. Try to delete an expense when there are none logged.
+
+**Expected Result:**
+- Appropriate error messages should be displayed for invalid inputs.
+- User should be prompted to re-enter the information.
+
+**Image Here:**
+- 
+
+#### 6. Navigating the Application
+
+**Test Steps:**
+1. At any prompt, enter an invalid option (e.g., a letter instead of a number).
+2. Verify the user is redirected back to the prompt with an error message.
+
+**Expected Result:**
+- An error message should be displayed for invalid inputs.
+- User should be redirected back to the prompt to make a valid selection.
+
+**Image Here:**
+- 
+
+**Test Steps:**
+1. At any prompt, enter '0' to log out.
+2. Verify the user is logged out and returned to the main menu.
+
+**Expected Result:**
+- User should be logged out and returned to the main menu.
+
+**Image Here:**
+- 
 
 ## Bugs 
 ### Fixed Bugs
@@ -65,3 +207,5 @@ The user to feel their security is taken seriously|When an existing user enters 
 - **Issue** - Cannot get delete_expense function to show
 - **Cause** - This was due to calling the list_expense function within delete function. This meant that the code would execute this function before finishing the delete expense function.
 - **Fix** - Create a new function to call the original list_expense function (name now changed to display_expenses()). Use delete function and new list function to call this seperately.
+
+## Unfixed Bugs

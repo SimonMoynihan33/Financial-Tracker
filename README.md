@@ -63,6 +63,9 @@ A user who uses this app has a clear goal in mind. Get control of expenditure. A
 
 ## Testing
 
+My testing for this project was carried out in a seperate file below.
+
+[Testing](/TESTING.md)
 
 ## Deployment
 

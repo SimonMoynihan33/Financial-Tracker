@@ -257,8 +257,8 @@ def expense_menu():
         else:
             print(
                 Fore.RED
-                + '  Invalid input. Please enter "1", "2", "3", '
-                ' "4" or "0" to log out.'
+                + '  Invalid input. Please enter "1", "2", "3" '
+                ' or "0" to log out.'
                 + Style.RESET_ALL
             )
 
