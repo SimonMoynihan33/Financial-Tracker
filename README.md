@@ -31,6 +31,8 @@ An application that can track expenses, log them and calculate by category and t
 
 ![Flowchart](docs/readme-images/flowchart.png)
 
+Due to constraints when it comes to python in the terminal, I opted to show a table of expenses rather than charts as was initially planned.
+
 ## User-Experience
 
 Users who use this app will have specific goals in mind. While The Expence Tracker does not control your expenses, it logs them, allowing you to see how much and where your money is going. 
@@ -53,26 +55,13 @@ A user who uses this app has a clear goal in mind. Get control of expenditure. A
 ## Features
 ### Login Feature
 
-## Creating the Heroku app
+### Validation Errors
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Design
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Future Deployment
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
+## Testing
 
 ## Bugs 
 ### Bug 01
@@ -118,7 +107,9 @@ Happy coding!
 ### Bug 09 
 - **Issue** - Cannot get delete_expense function to show
 - **Cause** - This was due to calling the list_expense function within delete function. This meant that the code would execute this function before finishing the delete expense function.
-- **Fix** - Create a new function to call the original list_expense function (name now changed to display_expenses()). Use delete function and new list function to call this seperately. 
+- **Fix** - Create a new function to call the original list_expense function (name now changed to display_expenses()). Use delete function and new list function to call this seperately.
+
+## Deployment
 
 ## Credits
 ### General Credits
