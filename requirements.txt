@@ -19,3 +19,4 @@ requests-oauthlib==2.0.0
 rsa==4.9
 tenacity==8.5.0
 tzdata==2024.1
+rich==13.7.1
