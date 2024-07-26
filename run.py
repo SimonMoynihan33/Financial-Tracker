@@ -232,13 +232,14 @@ def expense_menu():
             break
         elif response == '3':
             clear()
+            print('  Fetching data...')
             sleep(1.5)
             list_expenses()
             break
         elif response == '0':
             clear()
             sleep(1.5)
-            user_login()
+            greet_msg()
             break
         else:
             print(
@@ -484,14 +485,14 @@ def list_expenses():
 
     while True:
         go_back = input('\n  Type "1" to return to previous page or "2" to'
-                        + ' delete an expense\n').strip()
+                        + ' delete an expense\n  ').strip()
         if go_back == '1':
-            print('Returning...')
+            print('  Returning...')
             sleep(0.5)
             expense_menu()
             break
         elif go_back == '2':
-            print('Redirecting...')
+            print('  Redirecting...')
             sleep(0.5)
             delete_expense()
             break
