@@ -33,9 +33,8 @@ The following section outlines the manual testing process for the expense tracke
 **Expected Result:**
 - The welcome message and logo should be centered and displayed with the appropriate colors.
 
-**Image Here:**
-![Welcome message](docs/readme-images/home-screen.webp)
-
+**Acheived?** 
+- Yes
 #### Register
 **Test Steps:**
 1. Enter 'n' to register a new user.
